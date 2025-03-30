@@ -1,0 +1,328 @@
+{
+  "s_duct_shapes": [
+    {
+      "type": "circle_inlet_to_circle_outlet",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
+      "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
+      "performance": {
+        "Outlet Velocity": [199.63, 198.60, 197.57, 196.54, 195.51, 194.48, 193.45],
+        "Outlet Total Pressure": [95000, 94166.67, 93333.33, 92500, 91666.67, 90833.33, 90000],
+        "Centerline Velocity": [195.63, 194.63, 193.62, 192.61, 191.60, 190.59, 189.58],
+        "Velocity Loss": [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0],
+        "Pressure Loss": [5.00, 5.83, 6.67, 7.50, 8.33, 9.17, 10.00],
+        "description": [
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          }
+        ],
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXge-XIJkSUjjPHnb1JWrKS40o2Q_FMpM5CQ&s", "https://i.natgeofe.com/k/75ac774d-e6c7-44fa-b787-d0e20742f797/giant-panda-eating_4x3.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV51nrlqlXe8Xb6U_5kp7zpQatxNoWU-T1-Q&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmutQ_QG51ASXwqFqKLvPYIVDdc5dUaYGmOw&s", "https://files.worldwildlife.org/wwfcmsprod/images/HERO_Red_Panda_279141/story_full_width/4hpz6osw9r_XL_279141.jpg", "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg"
+        ],
+        "mesh_images": [
+          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "mesh_image2.jpg", "mesh_image3.jpg", "mesh_image4.jpg", "mesh_image5.jpg", "mesh_image6.jpg", "mesh_image7.jpg"
+        ],
+        "contour1_images": [
+          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+        ],
+        "contour2_images": [
+          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+        ],
+        "contour3_images": [
+          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+        ],
+        "contour4_images": [
+          "contour4_image1.jpg", "contour4_image2.jpg", "contour4_image3.jpg", "contour4_image4.jpg", "contour4_image5.jpg", "contour4_image6.jpg", "contour4_image7.jpg"
+        ]
+      }
+    },
+    {
+      "type": "circle_inlet_to_square_outlet",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
+      "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
+      "performance": {
+        "Outlet Velocity": [185.22, 183.50, 181.79, 180.08, 178.36, 176.64, 174.93],
+        "Outlet Total Pressure": [85000, 84166.67, 83333.33, 82500, 81666.67, 80833.33, 80000],
+        "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
+        "Velocity Loss": [10.00, 10.83, 11.67, 12.50, 13.33, 12.17, 15.00],
+        "Pressure Loss": [15.01, 15.63, 16.27, 17.55, 18.43, 17.47, 20.00],
+        "description": [
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          }
+        ],
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXge-XIJkSUjjPHnb1JWrKS40o2Q_FMpM5CQ&s", "https://i.natgeofe.com/k/75ac774d-e6c7-44fa-b787-d0e20742f797/giant-panda-eating_4x3.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV51nrlqlXe8Xb6U_5kp7zpQatxNoWU-T1-Q&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmutQ_QG51ASXwqFqKLvPYIVDdc5dUaYGmOw&s", "https://files.worldwildlife.org/wwfcmsprod/images/HERO_Red_Panda_279141/story_full_width/4hpz6osw9r_XL_279141.jpg", "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg"
+        ],
+        "mesh_images": [
+          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "mesh_image2.jpg", "mesh_image3.jpg", "mesh_image4.jpg", "mesh_image5.jpg", "mesh_image6.jpg", "mesh_image7.jpg"
+        ],
+        "contour1_images": [
+          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+        ],
+        "contour2_images": [
+          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+        ],
+        "contour3_images": [
+          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+        ],
+        "contour4_images": [
+          "contour4_image1.jpg", "contour4_image2.jpg", "contour4_image3.jpg", "contour4_image4.jpg", "contour4_image5.jpg", "contour4_image6.jpg", "contour4_image7.jpg"
+        ]
+      }
+    },
+    {
+      "type": "square_inlet_to_circle_outlet",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
+      "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
+      "performance": {
+        "Outlet Velocity": [185.22, 183.50, 181.79, 180.08, 178.36, 176.64, 174.93],
+        "Outlet Total Pressure": [85000, 84166.67, 83333.33, 82500, 81666.67, 80833.33, 80000],
+        "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
+        "Velocity Loss": [10.00, 9.83, 11.67, 13.50, 13.33, 14.17, 15.00],
+        "Pressure Loss": [14.00, 15.83, 15.67, 17.50, 15.33, 19.17, 20.00],
+        "description": [
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          }
+        ],
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXge-XIJkSUjjPHnb1JWrKS40o2Q_FMpM5CQ&s", "https://i.natgeofe.com/k/75ac774d-e6c7-44fa-b787-d0e20742f797/giant-panda-eating_4x3.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV51nrlqlXe8Xb6U_5kp7zpQatxNoWU-T1-Q&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmutQ_QG51ASXwqFqKLvPYIVDdc5dUaYGmOw&s", "https://files.worldwildlife.org/wwfcmsprod/images/HERO_Red_Panda_279141/story_full_width/4hpz6osw9r_XL_279141.jpg", "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg"
+        ],
+        "mesh_images": [
+          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "mesh_image2.jpg", "mesh_image3.jpg", "mesh_image4.jpg", "mesh_image5.jpg", "mesh_image6.jpg", "mesh_image7.jpg"
+        ],
+        "contour1_images": [
+          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+        ],
+        "contour2_images": [
+          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+        ],
+        "contour3_images": [
+          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+        ],
+        "contour4_images": [
+          "contour4_image1.jpg", "contour4_image2.jpg", "contour4_image3.jpg", "contour4_image4.jpg", "contour4_image5.jpg", "contour4_image6.jpg", "contour4_image7.jpg"
+        ]
+      }
+    },
+    {
+      "type": "square_inlet_to_square_outlet",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
+      "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
+      "performance": {
+        "Outlet Velocity": [193.45, 192.08, 190.71, 189.34, 187.96, 186.59, 185.22],
+        "Outlet Total Pressure": [90000, 89166.67, 88333.33, 87500, 86666.67, 85833.33, 85000],
+        "Centerline Velocity": [189.58, 188.24, 186.89, 185.55, 184.20, 182.86, 181.52],
+        "Velocity Loss": [6.00, 6.67, 7.33, 8.00, 8.67, 9.33, 10.00],
+        "Pressure Loss": [10.00, 10.83, 11.67, 12.50, 13.33, 14.17, 15.00],
+        "description": [
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          },
+          {
+            "Outlet Velocity": "Hello",
+            "Outlet Total Pressure": "Hello",
+            "Centerline Velocity": "Hello",
+            "Velocity Loss" :"Hello",
+            "Pressure Loss" : "Hello"
+          }
+        ],
+        "images": [
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXge-XIJkSUjjPHnb1JWrKS40o2Q_FMpM5CQ&s", "https://i.natgeofe.com/k/75ac774d-e6c7-44fa-b787-d0e20742f797/giant-panda-eating_4x3.jpg", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV51nrlqlXe8Xb6U_5kp7zpQatxNoWU-T1-Q&s", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmutQ_QG51ASXwqFqKLvPYIVDdc5dUaYGmOw&s", "https://files.worldwildlife.org/wwfcmsprod/images/HERO_Red_Panda_279141/story_full_width/4hpz6osw9r_XL_279141.jpg", "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg"
+        ],
+        "mesh_images": [
+          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "mesh_image2.jpg", "mesh_image3.jpg", "mesh_image4.jpg", "mesh_image5.jpg", "mesh_image6.jpg", "mesh_image7.jpg"
+        ],
+        "contour1_images": [
+          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+        ],
+        "contour2_images": [
+          "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+        ],
+        "contour3_images": [
+          "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+        ],
+        "contour4_images": [
+          "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "contour4_image2.jpg", "contour4_image3.jpg", "contour4_image4.jpg", "contour4_image5.jpg", "contour4_image6.jpg", "contour4_image7.jpg"
+        ]
+      }
+    }
+  ]
+}
