@@ -93,14 +93,14 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   const descriptions = getDescriptions();
   
   // Prepare data for trend chart (showing how metrics change across all angles)
-  const prepareTrendData = () => {
+  const prepareTrendData = (metric) => {
     return bendAngles.map((bendAngle, idx) => {
       const dataPoint = {
         angle: bendAngle
       };
       
       Object.keys(performanceData).forEach(ductType => {
-        dataPoint[ductType] = performanceData[ductType][activeMetric][idx];
+        dataPoint[ductType] = performanceData[ductType][metric][idx];
       });
       
       return dataPoint;
@@ -123,10 +123,10 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   };
   
   // Prepare data for the single metric bar chart (all duct types at current angle)
-  const prepareBarChartData = () => {
+  const prepareBarChartData = (metric) => {
     return Object.keys(performanceData).map(ductType => ({
       name: ductType,
-      value: performanceData[ductType][activeMetric][angleIndex]
+      value: performanceData[ductType][metric][angleIndex]
     }));
   };
   
@@ -138,9 +138,9 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
     "Circle-Square": "#ff7300"
   };
   
-  const trendData = prepareTrendData();
+  const trendData = prepareTrendData(activeMetric);
   const comparisonData = prepareComparisonData();
-  const barChartData = prepareBarChartData();
+  const barChartData = prepareBarChartData(activeMetric);
   
   // Custom tooltip format
   const CustomTooltip = ({ active, payload, label }) => {
@@ -164,59 +164,152 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
     setShowDescription(!showDescription);
   };
 
-  // PDF Download functionality
+  // Function to wait for state updates to complete
+  const waitForStateUpdate = () => {
+    return new Promise(resolve => {
+      // Use requestAnimationFrame to ensure the component has rendered
+      requestAnimationFrame(() => {
+        // Then use setTimeout to give React a chance to complete the rendering
+        setTimeout(resolve, 300); // Increased from 100ms to 300ms for more reliable rendering
+      });
+    });
+  };
+
+  // Function to capture component as image
+  const captureComponentAsImage = async (element) => {
+    if (!element) return null;
+    
+    const canvas = await html2canvas(element, {
+      scale: 2, // Higher scale for better quality
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff'
+    });
+    
+    return canvas.toDataURL('image/png');
+  };
+
+  // Function to add a title page with table of contents
+  const addTitlePage = (pdf) => {
+    // Set font styles
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(24);
+    
+    // Get page dimensions
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    
+    // Add title
+    pdf.text('S-Duct Performance Analysis Report', pageWidth / 2, 40, { align: 'center' });
+    
+    // Add angle information
+    pdf.setFontSize(18);
+    pdf.text(`Bend Angle: ${bendAngles[angleIndex]}°`, pageWidth / 2, 60, { align: 'center' });
+    
+    // Add generation date
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    pdf.text(`Generated on: ${formattedDate}`, pageWidth / 2, 75, { align: 'center' });
+    
+    // Add table of contents
+    pdf.setFontSize(20);
+    pdf.text('Table of Contents', pageWidth / 2, 100, { align: 'center' });
+    
+    // Add TOC entries
+    pdf.setFont('helvetica', 'normal');
+    pdf.setFontSize(14);
+    let yPosition = 120;
+    
+    metrics.forEach((metric, index) => {
+      pdf.text(`${index + 1}. ${metric}`, pageWidth / 2, yPosition, { align: 'center' });
+      yPosition += 10;
+    });
+    
+    // Optional: Add a decorative line
+    pdf.setDrawColor(100, 100, 100);
+    pdf.setLineWidth(0.5);
+    pdf.line(40, pageHeight - 40, pageWidth - 40, pageHeight - 40);
+    
+    // Add footer text
+    pdf.setFontSize(10);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text('S-Duct Analyzer - Comprehensive Performance Report', pageWidth / 2, pageHeight - 30, { align: 'center' });
+  };
+
+  // PDF Download functionality - Enhanced to generate all metrics
   const handleDownloadPDF = async () => {
     if (!contentRef.current) return;
     
     setIsDownloading(true);
     
     try {
-      // Force the description panel to be visible for PDF generation
+      // Store current state
       const wasDescriptionVisible = showDescription;
-      if (!wasDescriptionVisible) {
-        setShowDescription(true);
-        // Wait for state update and re-render
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
+      const previousMetric = activeMetric;
       
-      const content = contentRef.current;
+      // Force description panel to be visible
+      setShowDescription(true);
+      await waitForStateUpdate();
       
-      const canvas = await html2canvas(content, {
-        scale: 2, // Higher scale for better quality
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff'
-      });
-      
-      const imgData = canvas.toDataURL('image/png');
+      // Create PDF document
       const pdf = new jsPDF({
         orientation: 'landscape',
         unit: 'mm',
         format: 'a4'
       });
       
-      // Calculate positioning to maintain aspect ratio
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      
       // Add metadata
       pdf.setProperties({
-        title: `S-Duct Performance Analysis - ${activeMetric} at ${bendAngles[angleIndex]}°`,
+        title: `S-Duct Performance Analysis at ${bendAngles[angleIndex]}°`,
         subject: 'S-Duct Performance Analysis',
         creator: 'S-Duct Analyzer Tool',
         keywords: 'CFD, S-Duct, Performance Analysis'
       });
       
-      // Save PDF
-      pdf.save(`s-duct-analysis-${bendAngles[angleIndex]}deg-${activeMetric.replace(/\s+/g, '-').toLowerCase()}.pdf`);
+      // Add title page
+      addTitlePage(pdf);
       
-      // Restore previous description panel state
-      if (!wasDescriptionVisible) {
-        setShowDescription(false);
+      // Generate pages for each metric sequentially
+      for (let i = 0; i < metrics.length; i++) {
+        const metric = metrics[i];
+        
+        // Update active metric and wait for render
+        setActiveMetric(metric);
+        await waitForStateUpdate();
+        
+        // Capture the content
+        const imgData = await captureComponentAsImage(contentRef.current);
+        if (!imgData) continue;
+        
+        // Add new page and image
+        pdf.addPage();
+        
+        // Calculate positioning to maintain aspect ratio
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        
+        // Add title to the page
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+        pdf.text(`${i + 1}. ${metric}`, 10, 10);
       }
+      
+      // Save PDF
+      pdf.save(`s-duct-analysis-${bendAngles[angleIndex]}deg-all-metrics.pdf`);
+      
+      // Restore previous states
+      setActiveMetric(previousMetric);
+      setShowDescription(wasDescriptionVisible);
+      await waitForStateUpdate();
+      
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Failed to generate PDF. Please try again.');
@@ -245,7 +338,7 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
             disabled={isDownloading}
             className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center"
           >
-            {isDownloading ? 'Generating...' : 'Download PDF'}
+            {isDownloading ? 'Generating...' : 'Download All Metrics PDF'}
             <Printer className="h-5 w-5 ml-2" />
           </button>
         </div>

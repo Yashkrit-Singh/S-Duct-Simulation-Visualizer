@@ -4,6 +4,8 @@ import ImageDisplay from './section/Image_display';
 import AngleSlider from './section/AngleSlider';
 import data from './section/s_duct_shapes.json';
 import { motion, AnimatePresence } from 'framer-motion';
+// Import the PDF file
+import pdfFile from './S Duct Research Paper.pdf';
 
 function App() {
   const [angle, setAngle] = useState(0);
@@ -23,8 +25,8 @@ function App() {
   const handleDownload = () => {
     // Create a link to download the file
     const link = document.createElement('a');
-    link.href = '/path-to-your-file.pdf'; // Replace with your actual file path
-    link.download = 's_duct_documentation.pdf'; // Replace with your desired filename
+    link.href = pdfFile; // Use the imported PDF file
+    link.download = 'S Duct Research Paper.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -303,7 +303,7 @@ const ImageDisplay = ({ angle, data }) => {
 
       {/* Performance Analysis Component */}
       <div className="mt-16">
-        <PerformanceAnalysis angle={angle}/>
+        <PerformanceAnalysis angle={angle} s_duct_shapes={data.s_duct_shapes}/>
       </div>
     </div>
   );
