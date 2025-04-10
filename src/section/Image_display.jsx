@@ -335,7 +335,7 @@ const ImageDisplay = ({ angle, data }) => {
                       
                       {/* Contour Grid */}
                       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {['contour1_images', 'contour2_images', 'contour3_images', 'contour4_images'].map((contourKey, i) => {
+                        {['contour1_images', 'contour2_images', 'contour3_images'].map((contourKey, i) => {
                           // Map to the corresponding values key
                           const valueKey = contourKey.replace('_images', '_values');
                           

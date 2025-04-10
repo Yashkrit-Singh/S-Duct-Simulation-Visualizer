@@ -5,11 +5,12 @@
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
       "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
       "performance": {
-        "Outlet Velocity": [199.63, 198.60, 197.57, 196.54, 195.51, 194.48, 193.45],
-        "Outlet Total Pressure": [95000, 94166.67, 93333.33, 92500, 91666.67, 90833.33, 90000],
-        "Centerline Velocity": [195.63, 194.63, 193.62, 192.61, 191.60, 190.59, 189.58],
-        "Velocity Loss": [3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0],
-        "Pressure Loss": [5.00, 5.83, 6.67, 7.50, 8.33, 9.17, 10.00],
+        "Outlet Velocity": [125.9, 117.1, 106.8, 98.4, 89.7, 81.8, 75.3],
+        "Outlet Total Pressure": [106000, 89000, 77000, 70000, 55000, 44500, 38500],
+        "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
+        "Velocity Loss": [38.82, 45.12, 52.10, 58.22, 64.30, 70.25, 75.10],
+        "Pressure Loss": [-6.00, 11.00, 23.00, 30.00, 45.00, 55.50, 61.50],
+
         "description": [
           {
             "Outlet Velocity": "hello",
@@ -68,49 +69,49 @@
           "src\\practicum photo\\circle circle\\circle to circle 0\\M.png", "src\\practicum photo\\circle circle\\circle to circle 3\\M.png", "src\\practicum photo\\circle circle\\circle to circle 3\\M.png", "src\\practicum photo\\circle circle\\circle to circle 3\\M.png", "src\\practicum photo\\circle circle\\circle to circle  6\\M.png", "src\\practicum photo\\circle circle\\circle to circle  6\\M.png", "src\\practicum photo\\circle circle\\circle to circle  6\\M.png"
         ],
         "contour1_images": [
-          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+          "src\\practicum photo\\circle circle\\circle to circle 0\\V_o.png", "src\\practicum photo\\circle circle\\circle to circle 3\\V_0.png", "src\\practicum photo\\circle circle\\circle to circle 3\\V_0.png", "src\\practicum photo\\circle circle\\circle to circle 3\\V_0.png", "src\\practicum photo\\circle circle\\circle to circle  6\\V_0.png", "src\\practicum photo\\circle circle\\circle to circle  6\\V_0.png", "src\\practicum photo\\circle circle\\circle to circle  6\\V_0.png"
         ],
         "contour2_images": [
-          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+          "src\\practicum photo\\circle circle\\circle to circle 0\\P_0.png", "src\\practicum photo\\circle circle\\circle to circle 3\\P_0.png", "src\\practicum photo\\circle circle\\circle to circle 3\\P_0.png", "src\\practicum photo\\circle circle\\circle to circle 3\\P_0.png", "src\\practicum photo\\circle circle\\circle to circle  6\\P_O.png", "src\\practicum photo\\circle circle\\circle to circle  6\\P_O.png", "src\\practicum photo\\circle circle\\circle to circle  6\\P_O.png"
         ],
         "contour3_images": [
-          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+          "src\\practicum photo\\circle circle\\circle to circle 0\\Y.png", "src\\practicum photo\\circle circle\\circle to circle 3\\Y.png", "src\\practicum photo\\circle circle\\circle to circle 3\\Y.png", "src\\practicum photo\\circle circle\\circle to circle 3\\Y.png", "src\\practicum photo\\circle circle\\circle to circle  6\\Y.png", "src\\practicum photo\\circle circle\\circle to circle  6\\Y.png", "src\\practicum photo\\circle circle\\circle to circle  6\\Y.png"
         ],
         "contour_values": [
           {
-            "contour1_values": [32.5, 54.9, 77.3, 43.8, 65.2, 87.4, 21.6, 52.3, 76.5, 48.2, 60.7],
-            "contour2_values": [51.9, 76.2, 32.8, 67.4, 43.9, 79.5, 28.7, 56.4, 74.3, 37.5, 62.8],
-            "contour3_values": [27.4, 48.6, 65.7, 36.9, 57.4, 76.8, 32.5, 61.7, 40.3, 73.6, 51.2]
+            "contour1_values": [132.5, 124.9, 100.0, 80.45, 60.78, 40.32, 20.12, 5.34, 2.34, 0.12, 0.0],
+            "contour2_values": [1.10e+05, 1.03e+05, 9.8e+04, 8.20e+04, 7.34e+04, 6.20e+04, 4.20e+04, 2.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [36.9, 58.2, 80.6, 47.1, 68.5, 90.7, 25.9, 55.6, 79.8, 51.5, 63.9],
-            "contour2_values": [55.3, 79.5, 36.1, 70.7, 47.2, 82.8, 32.0, 59.7, 77.6, 40.8, 66.1],
-            "contour3_values": [30.7, 51.9, 69.0, 40.2, 60.7, 80.1, 35.8, 65.0, 43.6, 76.9, 54.5]
+            "contour1_values": [214.5, 193.9, 171.3, 150.45, 128.78, 107.32, 86.12, 45.34, 22.34, 10.12, 0.0],
+            "contour2_values": [1.03e+05, 9.612e+04, 8.8e+04, 7.20e+04, 6.34e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [40.4, 61.7, 84.1, 50.6, 72.0, 94.2, 29.4, 59.1, 83.3, 54.9, 67.4],
-            "contour2_values": [58.8, 82.9, 39.6, 74.2, 50.7, 86.3, 35.5, 63.2, 81.1, 44.3, 69.6],
-            "contour3_values": [34.2, 55.4, 72.5, 43.7, 64.2, 83.6, 39.3, 68.5, 47.1, 80.4, 58.0]
+         "contour1_values": [174.5, 153.9, 133.3, 120.45, 110.78, 102.32, 86.12, 45.34, 22.34, 10.12, 0.0],   
+         "contour2_values": [ 9.612e+04, 8.5e+04, 7.3e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [43.9, 65.2, 87.6, 54.1, 75.5, 97.7, 32.9, 62.6, 86.8, 58.4, 70.9],
-            "contour2_values": [62.3, 86.4, 43.1, 77.7, 54.2, 89.8, 39.0, 66.7, 84.6, 47.8, 73.1],
-            "contour3_values": [37.7, 58.9, 76.0, 47.2, 67.7, 87.1, 42.8, 72.0, 50.6, 83.9, 61.5]
+          "contour1_values": [174.5, 153.9, 133.3, 120.45, 101.78, 92.32, 76.12, 45.34, 22.34, 10.12, 0.0],   
+          "contour2_values": [ 8.612e+04, 7.5e+04, 6.6e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+       {
+            "contour1_values": [160.5, 134.9, 120.0, 100.45, 94.78, 83.32, 70.12, 55.34, 22.34, 15.12, 0.0],
+            "contour2_values": [6.50e+04, 5.23e+04, 4.8e+04, 3.20e+04, 9.34e+03, 8.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+{
+            "contour1_values": [155.5, 134.9, 119.0, 101.45, 85.78, 77.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [5.20e+04, 4.23e+04, 3.8e+04, 2.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [47.4, 68.7, 91.1, 57.6, 79.0, 101.2, 36.4, 66.1, 90.3, 61.9, 74.4],
-            "contour2_values": [65.8, 89.9, 46.6, 81.2, 57.7, 93.3, 42.5, 70.2, 88.1, 51.3, 76.6],
-            "contour3_values": [41.2, 62.4, 79.5, 50.7, 71.2, 90.6, 46.3, 75.5, 54.1, 87.4, 65.0]
-          },
-          {
-            "contour1_values": [50.9, 72.2, 94.6, 61.1, 82.5, 104.7, 39.9, 69.6, 93.8, 65.4, 77.9],
-            "contour2_values": [69.3, 93.4, 50.1, 84.7, 61.2, 96.8, 46.0, 73.7, 91.6, 54.8, 80.1],
-            "contour3_values": [44.7, 65.9, 83.0, 54.2, 74.7, 94.1, 49.8, 79.0, 57.6, 90.9, 68.5]
-          },
-          {
-            "contour1_values": [54.4, 75.7, 98.1, 64.6, 86.0, 108.2, 43.4, 73.1, 97.3, 68.9, 81.4],
-            "contour2_values": [72.8, 96.9, 53.6, 88.2, 64.7, 100.3, 49.5, 77.2, 95.1, 58.3, 83.6],
-            "contour3_values": [48.2, 69.4, 86.5, 57.7, 78.2, 97.6, 53.3, 82.5, 61.1, 94.4, 72.0]
+            "contour1_values": [140.5, 134.9, 120.0, 100.45, 80.78, 70.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [4.20e+04, 3.23e+04, 2.8e+04, 1.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           }
         ]
       }
@@ -120,11 +121,11 @@
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
       "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
       "performance": {
-        "Outlet Velocity": [185.22, 183.50, 181.79, 180.08, 178.36, 176.64, 174.93],
-        "Outlet Total Pressure": [85000, 84166.67, 83333.33, 82500, 81666.67, 80833.33, 80000],
+        "Outlet Velocity": [113.31, 103.50, 94.50, 88.20, 79.20, 71.10, 64.80],
+        "Outlet Total Pressure": [111340, 98000, 87010, 79100, 62150, 50285, 43505],
+        "Velocity Loss": [44.94, 52.00, 58.80, 65.10, 71.70, 77.80, 83.40],
+        "Pressure Loss": [-11.34, 2.00, 12.99, 20.90, 37.85, 49.71, 56.49],
         "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
-        "Velocity Loss": [10.00, 10.83, 11.67, 12.50, 13.33, 12.17, 15.00],
-        "Pressure Loss": [15.01, 15.63, 16.27, 17.55, 18.43, 17.47, 20.00],
         "description": [
           {
             "Outlet Velocity": "hello",
@@ -183,49 +184,49 @@
           "src\\practicum photo\\circle square\\circle to square_0\\M.png", "src\\practicum photo\\circle square\\circle_to_sqare_3\\M.png", "src\\practicum photo\\circle square\\circle_to_sqare_3\\M.png", "src\\practicum photo\\circle square\\circle_to_sqare_3\\M.png", "mesh_image5.jpg", "mesh_image6.jpg", "mesh_image7.jpg"
         ],
         "contour1_images": [
-          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+          "src\\practicum photo\\circle square\\circle to square_0\\V_0.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png", "src\\practicum photo\\circle square\\circle to square_3\\V_o.png"
         ],
         "contour2_images": [
-          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+          "src\\practicum photo\\circle square\\circle to square_0\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png"
         ],
         "contour3_images": [
-          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+          "src\\practicum photo\\circle square\\circle to square_0\\Y.png", "src\\practicum photo\\circle square\\circle to square_3\\Y.png", "src\\practicum photo\\circle square\\circle to square_3\\Y.png", "src\\practicum photo\\circle square\\circle to square_3\\Y.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png", "src\\practicum photo\\circle square\\circle to square_3\\P_0.png"
         ],
         "contour_values": [
           {
-            "contour1_values": [32.5, 54.9, 77.3, 43.8, 65.2, 87.4, 21.6, 52.3, 76.5, 48.2, 60.7],
-            "contour2_values": [51.9, 76.2, 32.8, 67.4, 43.9, 79.5, 28.7, 56.4, 74.3, 37.5, 62.8],
-            "contour3_values": [27.4, 48.6, 65.7, 36.9, 57.4, 76.8, 32.5, 61.7, 40.3, 73.6, 51.2]
+            "contour1_values": [122.5, 102.9, 100.0, 80.45, 60.78, 40.32, 20.12, 5.34, 2.34, 0.12, 0.0],
+            "contour2_values": [1.27e+05, 1.00e+05, 9.8e+04, 8.20e+04, 7.34e+04, 6.20e+04, 4.20e+04, 2.24e+04, 8.21e+03, 7.210e+03, 4.20e+04],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [36.9, 58.2, 80.6, 47.1, 68.5, 90.7, 25.9, 55.6, 79.8, 51.5, 63.9],
-            "contour2_values": [55.3, 79.5, 36.1, 70.7, 47.2, 82.8, 32.0, 59.7, 77.6, 40.8, 66.1],
-            "contour3_values": [30.7, 51.9, 69.0, 40.2, 60.7, 80.1, 35.8, 65.0, 43.6, 76.9, 54.5]
+            "contour1_values": [214.5, 193.9, 171.3, 150.45, 107.78, 100.32, 86.12, 45.34, 22.34, 10.12, 0.0],
+            "contour2_values": [1.03e+05, 96.12e+04, 8.8e+04, 7.20e+04, 6.34e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [40.4, 61.7, 84.1, 50.6, 72.0, 94.2, 29.4, 59.1, 83.3, 54.9, 67.4],
-            "contour2_values": [58.8, 82.9, 39.6, 74.2, 50.7, 86.3, 35.5, 63.2, 81.1, 44.3, 69.6],
-            "contour3_values": [34.2, 55.4, 72.5, 43.7, 64.2, 83.6, 39.3, 68.5, 47.1, 80.4, 58.0]
+         "contour1_values": [174.5, 153.9, 133.3, 120.45, 110.78, 102.32, 90.12, 45.34, 22.34, 10.12, 0.0],   
+         "contour2_values": [ 90.12e+04, 8.5e+04, 7.3e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [43.9, 65.2, 87.6, 54.1, 75.5, 97.7, 32.9, 62.6, 86.8, 58.4, 70.9],
-            "contour2_values": [62.3, 86.4, 43.1, 77.7, 54.2, 89.8, 39.0, 66.7, 84.6, 47.8, 73.1],
-            "contour3_values": [37.7, 58.9, 76.0, 47.2, 67.7, 87.1, 42.8, 72.0, 50.6, 83.9, 61.5]
+          "contour1_values": [174.5, 153.9, 133.3, 120.45, 91.78, 85.32, 76.12, 45.34, 22.34, 10.12, 0.0],   
+          "contour2_values": [ 8.42e+04, 7.5e+04, 6.6e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+       {
+            "contour1_values": [160.5, 134.9, 120.0, 100.45, 85.78, 73.32, 70.12, 55.34, 22.34, 15.12, 0.0],
+            "contour2_values": [8.50e+04, 7.23e+04, 6.8e+04, 5.20e+04, 9.34e+03, 8.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+{
+            "contour1_values": [155.5, 134.9, 119.0, 101.45, 75.78, 67.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [5.20e+04, 4.73e+04, 3.8e+04, 2.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [47.4, 68.7, 91.1, 57.6, 79.0, 101.2, 36.4, 66.1, 90.3, 61.9, 74.4],
-            "contour2_values": [65.8, 89.9, 46.6, 81.2, 57.7, 93.3, 42.5, 70.2, 88.1, 51.3, 76.6],
-            "contour3_values": [41.2, 62.4, 79.5, 50.7, 71.2, 90.6, 46.3, 75.5, 54.1, 87.4, 65.0]
-          },
-          {
-            "contour1_values": [50.9, 72.2, 94.6, 61.1, 82.5, 104.7, 39.9, 69.6, 93.8, 65.4, 77.9],
-            "contour2_values": [69.3, 93.4, 50.1, 84.7, 61.2, 96.8, 46.0, 73.7, 91.6, 54.8, 80.1],
-            "contour3_values": [44.7, 65.9, 83.0, 54.2, 74.7, 94.1, 49.8, 79.0, 57.6, 90.9, 68.5]
-          },
-          {
-            "contour1_values": [54.4, 75.7, 98.1, 64.6, 86.0, 108.2, 43.4, 73.1, 97.3, 68.9, 81.4],
-            "contour2_values": [72.8, 96.9, 53.6, 88.2, 64.7, 100.3, 49.5, 77.2, 95.1, 58.3, 83.6],
-            "contour3_values": [48.2, 69.4, 86.5, 57.7, 78.2, 97.6, 53.3, 82.5, 61.1, 94.4, 72.0]
+            "contour1_values": [140.5, 134.9, 120.0, 100.45, 68.78, 60.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [4.50e+04, 4.03e+04, 3.4e+04, 2.20e+04, 9.34e+03, 7.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           }
         ]
       }
@@ -235,11 +236,11 @@
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
       "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
       "performance": {
-        "Outlet Velocity": [185.22, 183.50, 181.79, 180.08, 178.36, 176.64, 174.93],
-        "Outlet Total Pressure": [85000, 84166.67, 83333.33, 82500, 81666.67, 80833.33, 80000],
+        "Outlet Velocity": [121.90, 112.80, 103.20, 96.10, 87.40, 79.80, 73.20],
+        "Outlet Total Pressure": [103000, 87500, 74000, 67000, 52000, 40500, 34000],
+        "Velocity Loss": [40.76, 48.50, 55.90, 62.15, 68.90, 74.80, 80.40],
+        "Pressure Loss": [-3.00, 12.50, 26.00, 33.00, 48.00, 59.50, 66.00],
         "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
-        "Velocity Loss": [10.00, 9.83, 11.67, 13.50, 13.33, 14.17, 15.00],
-        "Pressure Loss": [14.00, 15.83, 15.67, 17.50, 15.33, 19.17, 20.00],
         "description": [
           {
             "Outlet Velocity": "hello",
@@ -295,52 +296,52 @@
           "src\\Geometry\\square_circle\\0.png", "src\\Geometry\\square_circle\\1.png", "src\\Geometry\\square_circle\\2.png", "src\\Geometry\\square_circle\\3.png", "src\\Geometry\\square_circle\\4.png", "src\\Geometry\\square_circle\\5.png", "src\\Geometry\\square_circle\\6.png"
         ],
         "mesh_images": [
-          "src\\practicum photo\\square circle\\0\\m.png", "mesh_image2.jpg", "mesh_image3.jpg", "mesh_image4.jpg", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png"
+          "src\\practicum photo\\square circle\\0\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png", "src\\practicum photo\\square circle\\6\\m.png"
         ],
         "contour1_images": [
-          "contour1_image1.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+          "src\\practicum photo\\square circle\\0\\vo.png", "src\\practicum photo\\square circle\\3\\vo.png", "src\\practicum photo\\square circle\\3\\vo.png", "src\\practicum photo\\square circle\\3\\vo.png", "src\\practicum photo\\square circle\\6\\vo.png", "src\\practicum photo\\square circle\\6\\vo.png", "src\\practicum photo\\square circle\\6\\vo.png"
         ],
         "contour2_images": [
-          "contour2_image1.jpg", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+          "src\\practicum photo\\square circle\\0\\po.png", "src\\practicum photo\\square circle\\3\\po.png", "src\\practicum photo\\square circle\\3\\po.png", "src\\practicum photo\\square circle\\3\\po.png", "src\\practicum photo\\square circle\\6\\po.png", "src\\practicum photo\\square circle\\6\\po.png", "src\\practicum photo\\square circle\\6\\po.png"
         ],
         "contour3_images": [
-          "contour3_image1.jpg", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+          "src\\practicum photo\\square circle\\0\\y.png", "src\\practicum photo\\square circle\\6\\y.png", "src\\practicum photo\\square circle\\6\\y.png", "src\\practicum photo\\square circle\\6\\y.png", "src\\practicum photo\\square circle\\6\\y.png", "src\\practicum photo\\square circle\\6\\y.png", "src\\practicum photo\\square circle\\6\\y.png"
         ],
         "contour_values": [
           {
-            "contour1_values": [32.5, 54.9, 77.3, 43.8, 65.2, 87.4, 21.6, 52.3, 76.5, 48.2, 60.7],
-            "contour2_values": [51.9, 76.2, 32.8, 67.4, 43.9, 79.5, 28.7, 56.4, 74.3, 37.5, 62.8],
-            "contour3_values": [27.4, 48.6, 65.7, 36.9, 57.4, 76.8, 32.5, 61.7, 40.3, 73.6, 51.2]
+            "contour1_values": [125.3, 118.9, 100.0, 80.45, 60.78, 40.32, 20.12, 5.34, 2.34, 0.12, 0.0],
+            "contour2_values": [1.05e+05, 1.01e+05, 9.8e+04, 8.20e+04, 7.34e+04, 6.20e+04, 4.20e+04, 2.24e+04, 8.21e+03, 7.210e+03, 4.20e+03],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [36.9, 58.2, 80.6, 47.1, 68.5, 90.7, 25.9, 55.6, 79.8, 51.5, 63.9],
-            "contour2_values": [55.3, 79.5, 36.1, 70.7, 47.2, 82.8, 32.0, 59.7, 77.6, 40.8, 66.1],
-            "contour3_values": [30.7, 51.9, 69.0, 40.2, 60.7, 80.1, 35.8, 65.0, 43.6, 76.9, 54.5]
+            "contour1_values": [214.5, 193.9, 171.3, 150.45, 118.78, 107.32, 86.12, 45.34, 22.34, 10.12, 0.0],
+            "contour2_values": [9.23e+04, 8.2e+04, 8.8e+04, 7.20e+04, 6.34e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [40.4, 61.7, 84.1, 50.6, 72.0, 94.2, 29.4, 59.1, 83.3, 54.9, 67.4],
-            "contour2_values": [58.8, 82.9, 39.6, 74.2, 50.7, 86.3, 35.5, 63.2, 81.1, 44.3, 69.6],
-            "contour3_values": [34.2, 55.4, 72.5, 43.7, 64.2, 83.6, 39.3, 68.5, 47.1, 80.4, 58.0]
+         "contour1_values": [174.5, 153.9, 133.3, 120.45, 110.78, 95.32, 86.12, 45.34, 22.34, 10.12, 0.0],   
+         "contour2_values": [ 7.92e+04, 7.01e+04, 6.3e+04 , 5.70e+04, 5.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [43.9, 65.2, 87.6, 54.1, 75.5, 97.7, 32.9, 62.6, 86.8, 58.4, 70.9],
-            "contour2_values": [62.3, 86.4, 43.1, 77.7, 54.2, 89.8, 39.0, 66.7, 84.6, 47.8, 73.1],
-            "contour3_values": [37.7, 58.9, 76.0, 47.2, 67.7, 87.1, 42.8, 72.0, 50.6, 83.9, 61.5]
+          "contour1_values": [174.5, 153.9, 133.3, 120.45, 100.78, 92.32, 76.12, 45.34, 22.34, 10.12, 0.0],   
+          "contour2_values": [ 7.12e+04, 6.3e+04, 5.6e+04 , 5.70e+04, 5.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+       {
+            "contour1_values": [160.5, 134.9, 120.0, 100.45, 89.78, 83.32, 70.12, 55.34, 22.34, 15.12, 0.0],
+            "contour2_values": [5.50e+04, 4.83e+04, 4.8e+04, 3.20e+04, 9.34e+03, 8.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+{
+            "contour1_values": [155.5, 134.9, 119.0, 101.45, 81.78, 77.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [4.20e+04, 3.53e+04, 2.8e+04, 2.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [47.4, 68.7, 91.1, 57.6, 79.0, 101.2, 36.4, 66.1, 90.3, 61.9, 74.4],
-            "contour2_values": [65.8, 89.9, 46.6, 81.2, 57.7, 93.3, 42.5, 70.2, 88.1, 51.3, 76.6],
-            "contour3_values": [41.2, 62.4, 79.5, 50.7, 71.2, 90.6, 46.3, 75.5, 54.1, 87.4, 65.0]
-          },
-          {
-            "contour1_values": [50.9, 72.2, 94.6, 61.1, 82.5, 104.7, 39.9, 69.6, 93.8, 65.4, 77.9],
-            "contour2_values": [69.3, 93.4, 50.1, 84.7, 61.2, 96.8, 46.0, 73.7, 91.6, 54.8, 80.1],
-            "contour3_values": [44.7, 65.9, 83.0, 54.2, 74.7, 94.1, 49.8, 79.0, 57.6, 90.9, 68.5]
-          },
-          {
-            "contour1_values": [54.4, 75.7, 98.1, 64.6, 86.0, 108.2, 43.4, 73.1, 97.3, 68.9, 81.4],
-            "contour2_values": [72.8, 96.9, 53.6, 88.2, 64.7, 100.3, 49.5, 77.2, 95.1, 58.3, 83.6],
-            "contour3_values": [48.2, 69.4, 86.5, 57.7, 78.2, 97.6, 53.3, 82.5, 61.1, 94.4, 72.0]
+            "contour1_values": [140.5, 134.9, 120.0, 100.45, 75.78, 70.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [3.60e+04, 3.13e+04, 2.8e+04, 1.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           }
         ]
       }
@@ -350,11 +351,11 @@
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/1200px-Grosser_Panda.JPG",
       "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
       "performance": {
-        "Outlet Velocity": [193.45, 192.08, 190.71, 189.34, 187.96, 186.59, 185.22],
-        "Outlet Total Pressure": [90000, 89166.67, 88333.33, 87500, 86666.67, 85833.33, 85000],
+        "Outlet Velocity": [119.80, 110.60, 101.50, 94.70, 86.40, 79.50, 72.90],
+        "Outlet Total Pressure": [109500, 95000, 81500, 73500, 58000, 47000, 40500],
+        "Velocity Loss": [41.79, 49.08, 55.40, 61.50, 67.70, 73.15, 78.90],
+        "Pressure Loss": [-9.5, 5.00, 18.50, 26.50, 42.00, 53.00, 59.50],
         "Centerline Velocity": [189.58, 188.24, 186.89, 185.55, 184.20, 182.86, 181.52],
-        "Velocity Loss": [6.00, 6.67, 7.33, 8.00, 8.67, 9.33, 10.00],
-        "Pressure Loss": [10.00, 10.83, 11.67, 12.50, 13.33, 14.17, 15.00],
         "description": [
           {
             "Outlet Velocity": "hello",
@@ -413,49 +414,49 @@
           "src\\practicum photo\\square square\\0\\m.png", "src\\practicum photo\\square square\\3\\m.png", "src\\practicum photo\\square square\\3\\m.png", "src\\practicum photo\\square square\\5\\m.png", "src\\practicum photo\\square square\\5\\m.png", "src\\practicum photo\\square square\\6\\m.png", "src\\practicum photo\\square square\\6\\m.png"
         ],
         "contour1_images": [
-          "https://www.shutterstock.com/image-vector/flat-vector-cute-cartoon-panda-260nw-2343798945.jpg", "contour1_image2.jpg", "contour1_image3.jpg", "contour1_image4.jpg", "contour1_image5.jpg", "contour1_image6.jpg", "contour1_image7.jpg"
+          "src\\practicum photo\\square square\\0\\vo.png", "src\\practicum photo\\square square\\3\\vo.png", "src\\practicum photo\\square square\\3\\vo.png", "src\\practicum photo\\square square\\5\\vo.png", "src\\practicum photo\\square square\\5\\vo.png", "src\\practicum photo\\square square\\6\\vo.png", "src\\practicum photo\\square square\\6\\vo.png"
         ],
         "contour2_images": [
-          "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "contour2_image2.jpg", "contour2_image3.jpg", "contour2_image4.jpg", "contour2_image5.jpg", "contour2_image6.jpg", "contour2_image7.jpg"
+          "src\\practicum photo\\square square\\0\\po.png", "src\\practicum photo\\square square\\3\\po.png", "src\\practicum photo\\square square\\3\\po.png", "src\\practicum photo\\square square\\5\\po.png", "src\\practicum photo\\square square\\5\\po.png", "src\\practicum photo\\square square\\6\\po.png", "src\\practicum photo\\square square\\6\\po.png"
         ],
         "contour3_images": [
-          "https://media.istockphoto.com/id/1195743934/vector/cute-panda-character-vector-design.jpg?s=612x612&w=0&k=20&c=J3ht-bKADmsXvF6gFIleRtfJ6NGhXnfIsrwlsUF8w80=", "contour3_image2.jpg", "contour3_image3.jpg", "contour3_image4.jpg", "contour3_image5.jpg", "contour3_image6.jpg", "contour3_image7.jpg"
+          "src\\practicum photo\\square square\\0\\y.png", "src\\practicum photo\\square square\\3\\y.png", "src\\practicum photo\\square square\\3\\y.png", "src\\practicum photo\\square square\\5\\y.png", "src\\practicum photo\\square square\\5\\y.png", "src\\practicum photo\\square square\\6\\y.png", "src\\practicum photo\\square square\\6\\y.png"
         ],
         "contour_values": [
           {
-            "contour1_values": [32.5, 54.9, 77.3, 43.8, 65.2, 87.4, 21.6, 52.3, 76.5, 48.2, 60.7],
-            "contour2_values": [51.9, 76.2, 32.8, 67.4, 43.9, 79.5, 28.7, 56.4, 74.3, 37.5, 62.8],
-            "contour3_values": [27.4, 48.6, 65.7, 36.9, 57.4, 76.8, 32.5, 61.7, 40.3, 73.6, 51.2]
+            "contour1_values": [122.5, 117.9, 100.0, 80.45, 60.78, 40.32, 20.12, 5.34, 2.34, 0.12, 0.0],
+            "contour2_values": [1.15e+05, 1.06e+05, 9.8e+04, 8.20e+04, 7.34e+04, 6.20e+04, 4.20e+04, 2.24e+04, 8.21e+03, 7.210e+03, 4.20e+03],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [36.9, 58.2, 80.6, 47.1, 68.5, 90.7, 25.9, 55.6, 79.8, 51.5, 63.9],
-            "contour2_values": [55.3, 79.5, 36.1, 70.7, 47.2, 82.8, 32.0, 59.7, 77.6, 40.8, 66.1],
-            "contour3_values": [30.7, 51.9, 69.0, 40.2, 60.7, 80.1, 35.8, 65.0, 43.6, 76.9, 54.5]
+            "contour1_values": [192.5, 170.9, 150.3, 135.45, 115.78, 107.32, 86.12, 45.34, 22.34, 10.12, 0.0],
+            "contour2_values": [1.03e+05, 9.12e+04, 8.8e+04, 7.20e+04, 6.34e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [40.4, 61.7, 84.1, 50.6, 72.0, 94.2, 29.4, 59.1, 83.3, 54.9, 67.4],
-            "contour2_values": [58.8, 82.9, 39.6, 74.2, 50.7, 86.3, 35.5, 63.2, 81.1, 44.3, 69.6],
-            "contour3_values": [34.2, 55.4, 72.5, 43.7, 64.2, 83.6, 39.3, 68.5, 47.1, 80.4, 58.0]
+         "contour1_values": [174.5, 153.9, 133.3, 120.45, 107.12, 95.32, 86.12, 45.34, 22.34, 10.12, 0.0],   
+         "contour2_values": [ 8.612e+04, 7.5e+04, 7.1e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [43.9, 65.2, 87.6, 54.1, 75.5, 97.7, 32.9, 62.6, 86.8, 58.4, 70.9],
-            "contour2_values": [62.3, 86.4, 43.1, 77.7, 54.2, 89.8, 39.0, 66.7, 84.6, 47.8, 73.1],
-            "contour3_values": [37.7, 58.9, 76.0, 47.2, 67.7, 87.1, 42.8, 72.0, 50.6, 83.9, 61.5]
+          "contour1_values": [164.5, 143.9, 123.3, 110.45, 96.23, 92.32, 76.12, 45.34, 22.34, 10.12, 0.0],   
+          "contour2_values": [ 7.612e+04, 7.1e+04, 6.6e+04 , 6.70e+04, 6.14e+04, 4.20e+04, 2.20e+04, 1.24e+04, 8.21e+03, 7.210e+03, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+       {
+            "contour1_values": [160.5, 134.9, 120.0, 100.45, 90.78, 82.32, 70.12, 55.34, 22.34, 15.12, 0.0],
+            "contour2_values": [6.40e+04, 5.43e+04, 4.8e+04, 3.20e+04, 9.34e+03, 8.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
+          },
+{
+            "contour1_values": [155.5, 134.9, 119.0, 101.45, 81.78, 77.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [5.10e+04, 4.5e+04, 3.8e+04, 2.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           },
           {
-            "contour1_values": [47.4, 68.7, 91.1, 57.6, 79.0, 101.2, 36.4, 66.1, 90.3, 61.9, 74.4],
-            "contour2_values": [65.8, 89.9, 46.6, 81.2, 57.7, 93.3, 42.5, 70.2, 88.1, 51.3, 76.6],
-            "contour3_values": [41.2, 62.4, 79.5, 50.7, 71.2, 90.6, 46.3, 75.5, 54.1, 87.4, 65.0]
-          },
-          {
-            "contour1_values": [50.9, 72.2, 94.6, 61.1, 82.5, 104.7, 39.9, 69.6, 93.8, 65.4, 77.9],
-            "contour2_values": [69.3, 93.4, 50.1, 84.7, 61.2, 96.8, 46.0, 73.7, 91.6, 54.8, 80.1],
-            "contour3_values": [44.7, 65.9, 83.0, 54.2, 74.7, 94.1, 49.8, 79.0, 57.6, 90.9, 68.5]
-          },
-          {
-            "contour1_values": [54.4, 75.7, 98.1, 64.6, 86.0, 108.2, 43.4, 73.1, 97.3, 68.9, 81.4],
-            "contour2_values": [72.8, 96.9, 53.6, 88.2, 64.7, 100.3, 49.5, 77.2, 95.1, 58.3, 83.6],
-            "contour3_values": [48.2, 69.4, 86.5, 57.7, 78.2, 97.6, 53.3, 82.5, 61.1, 94.4, 72.0]
+            "contour1_values": [140.5, 134.9, 120.0, 100.45, 80.78, 65.32, 50.12, 35.34, 12.34, 5.12, 0.0],
+            "contour2_values": [4.10e+04, 3.5e+04, 2.8e+04, 1.20e+04, 7.34e+03, 6.20e+03, 4.20e+03, 2.24e+03, 8.21e+02, 7.210e+02, 4.20e+02],
+            "contour3_values": [3.26, 3.14, 3.01, 2.88, 2.76, 2.63, 2.50, 2.37, 2.25, 2.12, 1.99]
           }
         ]
       }
