@@ -5,7 +5,7 @@ import ImageDisplay from './section/Image_display';
 import AngleSlider from './section/AngleSlider';
 import data from './section/s_duct_shapes.json';
 import { motion, AnimatePresence } from 'framer-motion';
-import AIModel from './AIMOdel';
+import AIModel from './AIModel';
 import NavBar from './NavBar'; // Import the NavBar component
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         setShowAbout={setShowAbout} 
         setShowAIModel={setShowAIModel} 
       />
-      
+      <div className='py-3'></div>
       {showAIModel ? (
         <div id="ai-model">
           <AIModel onBack={() => setShowAIModel(false)} />

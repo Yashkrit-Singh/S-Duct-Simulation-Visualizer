@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import PerformanceAnalysis from './section/PerformanceAnalysis';
 
-// Create a custom slider component for the AI Model page
+// Custom slider component
 const CustomRangeInput = ({ label, min, max, step, value, onChange, unit }) => {
   return (
     <div className="mb-6">
@@ -30,7 +31,7 @@ const CustomRangeInput = ({ label, min, max, step, value, onChange, unit }) => {
   );
 };
 
-// Create a custom number input component
+// Custom number input component
 const CustomNumberInput = ({ label, min, max, step, value, onChange, unit }) => {
   return (
     <div className="mb-6">
@@ -60,7 +61,7 @@ const CustomNumberInput = ({ label, min, max, step, value, onChange, unit }) => 
   );
 };
 
-// Create a shape selector component
+// Shape selector component
 const ShapeSelector = ({ shapes, selectedShape, onSelect }) => {
   return (
     <div className="mb-6">
@@ -84,223 +85,138 @@ const ShapeSelector = ({ shapes, selectedShape, onSelect }) => {
   );
 };
 
-// Data interpolation function
-const interpolateData = (baseData, angle, velocity) => {
-  // Base velocity in the dataset
-  const baseVelocity = 208;
-  
-  // Find the two closest angles in the dataset
-  const bendAngles = baseData.bend_angles;
-  let lowerIndex = 0;
-  let upperIndex = 0;
-  
-  for (let i = 0; i < bendAngles.length; i++) {
-    if (angle >= bendAngles[i]) {
-      lowerIndex = i;
+// Component to show Model Evaluation Metrics and Data Split
+const ModelMetricsDisplay = () => {
+  const metrics = [
+    { 
+      title: "Outlet Velocity (m/s)", 
+      r2: 0.9988, 
+      rmse: 1.11,
+      color: "from-blue-400 to-blue-600" 
+    },
+    { 
+      title: "Outlet Pressure (Pa)", 
+      r2: 1.0000, 
+      rmse: 97.83,
+      color: "from-purple-400 to-purple-600" 
+    },
+    { 
+      title: "Velocity Loss (%)", 
+      r2: 0.9998, 
+      rmse: 0.18,
+      color: "from-teal-400 to-teal-600" 
+    },
+    { 
+      title: "Pressure Loss (%)", 
+      r2: 1.0000, 
+      rmse: 0.09,
+      color: "from-amber-400 to-amber-600" 
     }
-    if (angle <= bendAngles[i]) {
-      upperIndex = i;
-      break;
-    }
-  }
-  
-  // If angle is exactly one of the bend angles, no interpolation needed for angle
-  const exactAngle = angle === bendAngles[lowerIndex];
-  
-  // Calculate interpolation factor for angle
-  const angleFactor = exactAngle ? 0 : (angle - bendAngles[lowerIndex]) / (bendAngles[upperIndex] - bendAngles[lowerIndex]);
-  
-  // Calculate velocity scaling factor (with some non-linearity for realism)
-  const velocityFactor = Math.pow(velocity / baseVelocity, 1.2);
-  
-  // Add some randomness for realism
-  const randomFactor = () => 1 + (Math.random() * 0.1 - 0.05); // ±5% randomness
-  
-  // Perform interpolation for each performance metric
-  const interpolatedData = {};
-  
-  for (const metric in baseData.performance) {
-    if (exactAngle) {
-      // Exact angle match, just scale by velocity
-      interpolatedData[metric] = baseData.performance[metric][lowerIndex] * velocityFactor * randomFactor();
-    } else {
-      // Interpolate between two angles
-      const lowerValue = baseData.performance[metric][lowerIndex];
-      const upperValue = baseData.performance[metric][upperIndex];
-      const interpolatedValue = lowerValue + angleFactor * (upperValue - lowerValue);
+  ];
+
+  return (
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl shadow-lg mt-8 border border-gray-200">
+      <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
+        <svg className="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        Model Evaluation Metrics
+      </h2>
       
-      // Scale by velocity factor
-      interpolatedData[metric] = interpolatedValue * velocityFactor * randomFactor();
-    }
-  }
-  
-  return interpolatedData;
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {metrics.map((metric, index) => (
+          <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
+            <div className={`bg-gradient-to-r ${metric.color} h-2`}></div>
+            <div className="p-4">
+              <h3 className="font-semibold text-gray-700 mb-2">{metric.title}</h3>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-sm text-gray-500">R² Score</span>
+                <div className="flex items-center">
+                  <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                    <div className={`bg-gradient-to-r ${metric.color} h-2 rounded-full`} style={{ width: `${metric.r2 * 100}%` }}></div>
+                  </div>
+                  <span className="font-mono font-medium">{metric.r2.toFixed(4)}</span>
+                </div>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-500">RMSE</span>
+                <span className="font-mono font-medium">{metric.rmse.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="bg-white p-5 rounded-lg shadow-md border border-gray-100">
+        <h3 className="font-semibold text-gray-700 mb-3 flex items-center">
+          <svg className="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+          </svg>
+          Data Split
+        </h3>
+        <div className="flex items-center mt-2">
+          <div className="w-full bg-gray-200 rounded-full h-4">
+            <div className="bg-gradient-to-r from-blue-400 to-blue-600 h-4 rounded-l-full text-xs text-white flex items-center justify-center" style={{ width: "80%" }}>80%</div>
+          </div>
+        </div>
+        <div className="flex justify-between text-sm text-gray-600 mt-1">
+          <span>Training Data (80%)</span>
+          <span>Testing Data (20%)</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-// Mock S-duct shapes base data
-const sdShapesBaseData = {
-  "circle-circle": {
-    "type": "circle_inlet_to_circle_outlet",
-    "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
-    "performance": {
-      "Outlet Velocity": [125.9, 117.1, 106.8, 98.4, 89.7, 81.8, 75.3],
-      "Outlet Total Pressure": [106000, 89000, 77000, 70000, 55000, 44500, 38500],
-      "Centerline Velocity": [181.52, 179.83, 178.15, 176.47, 174.79, 173.11, 171.43],
-      "Velocity Loss": [38.82, 45.12, 52.10, 58.22, 64.30, 70.25, 75.10],
-      "Pressure Loss": [-6.00, 11.00, 23.00, 30.00, 45.00, 55.50, 61.50]
-    },
-    "description": {
-      "Outlet Velocity": "Circle to Circle configuration provides smooth flow transitions with moderate velocity preservation.",
-      "Outlet Total Pressure": "Pressure distribution remains relatively uniform with minimal losses.",
-      "Centerline Velocity": "Flow along centerline maintains stability with gradual reduction.",
-      "Velocity Loss": "Minimal velocity loss due to streamlined geometry.",
-      "Pressure Loss": "Low pressure losses observed due to smooth transitions."
-    }
-  },
-  "circle-square": {
-    "type": "circle_inlet_to_square_outlet",
-    "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
-    "performance": {
-      "Outlet Velocity": [130.2, 122.4, 114.3, 106.1, 97.8, 90.2, 84.5],
-      "Outlet Total Pressure": [102000, 87000, 76000, 68000, 59000, 51000, 46000],
-      "Centerline Velocity": [182.30, 180.85, 179.40, 177.95, 176.50, 175.05, 173.60],
-      "Velocity Loss": [35.24, 41.32, 47.40, 53.48, 59.56, 65.64, 71.72],
-      "Pressure Loss": [-2.00, 13.00, 24.00, 32.00, 41.00, 49.00, 54.00]
-    },
-    "description": {
-      "Outlet Velocity": "Circle to Square configuration preserves velocity best among transitions.",
-      "Outlet Total Pressure": "High pressure recovery with minimal losses during transition.",
-      "Centerline Velocity": "Most stable centerline velocity profile among all configurations.",
-      "Velocity Loss": "Lowest velocity loss due to favorable inlet conditions.",
-      "Pressure Loss": "Minimal pressure losses as flow expands gradually into square outlet."
-    }
-  },
-  "square-square": {
-    "type": "square_inlet_to_square_outlet",
-    "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
-    "performance": {
-      "Outlet Velocity": [118.7, 107.9, 97.2, 88.6, 80.5, 73.2, 67.1],
-      "Outlet Total Pressure": [97000, 79000, 64000, 53000, 44000, 37000, 32000],
-      "Centerline Velocity": [175.40, 173.25, 171.10, 168.95, 166.80, 164.65, 162.50],
-      "Velocity Loss": [45.23, 52.34, 59.45, 66.56, 73.67, 80.78, 87.89],
-      "Pressure Loss": [3.00, 21.00, 36.00, 47.00, 56.00, 63.00, 68.00]
-    },
-    "description": {
-      "Outlet Velocity": "Square to Square configuration creates corner vortices that reduce overall velocity.",
-      "Outlet Total Pressure": "Significant pressure losses at corners reduce total pressure recovery.",
-      "Centerline Velocity": "Flow separation at corners impacts centerline velocity stability.",
-      "Velocity Loss": "Higher velocity losses due to corner flow interactions.",
-      "Pressure Loss": "Most significant pressure losses among configurations due to geometric discontinuities."
-    }
-  },
-  "square-circle": {
-    "type": "square_inlet_to_circle_outlet",
-    "bend_angles": [0, 7.5, 15, 22.5, 30, 37.5, 45],
-    "performance": {
-      "Outlet Velocity": [123.4, 113.8, 104.5, 96.7, 89.2, 82.3, 76.8],
-      "Outlet Total Pressure": [99000, 84000, 72000, 63000, 55000, 48000, 42000],
-      "Centerline Velocity": [178.62, 176.74, 174.86, 172.98, 171.10, 169.22, 167.34],
-      "Velocity Loss": [41.03, 47.52, 54.01, 60.50, 66.99, 73.48, 79.97],
-      "Pressure Loss": [1.00, 16.00, 28.00, 37.00, 45.00, 52.00, 58.00]
-    },
-    "description": {
-      "Outlet Velocity": "Square to Circle configuration shows improved outlet velocity from expanding flow.",
-      "Outlet Total Pressure": "Moderate pressure recovery as flow transitions from corners to circular profile.",
-      "Centerline Velocity": "Gradual improvement in flow regularity towards outlet.",
-      "Velocity Loss": "Moderate velocity losses from inlet turbulence that stabilizes towards outlet.",
-      "Pressure Loss": "Medium pressure losses primarily at the inlet corners."
-    }
-  }
-};
-
-// Main AIModel component
 function AIModel({ onBack }) {
+  // Local state for user inputs and results
   const [angle, setAngle] = useState(15);
   const [velocity, setVelocity] = useState(150);
-  const [selectedShape, setSelectedShape] = useState('circle-circle');
+  const [selectedShape, setSelectedShape] = useState('Circle-Circle');
   const [isCalculating, setIsCalculating] = useState(false);
   const [results, setResults] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [showPerformanceAnalysis, setShowPerformanceAnalysis] = useState(false);
-  const [interpolatedSDuctData, setInterpolatedSDuctData] = useState(null);
 
-  // Shape data for the four S-duct configurations
+  // Shape data for the S-duct configurations
   const shapes = [
-    { id: 'circle-circle', name: 'Circle to Circle' },
-    { id: 'circle-square', name: 'Circle to Square' },
-    { id: 'square-square', name: 'Square to Square' },
-    { id: 'square-circle', name: 'Square to Circle' }
+    { id: 'Circle-Circle', name: 'Circle to Circle' },
+    { id: 'Circle-Square', name: 'Circle to Square' },
+    { id: 'Square-Square', name: 'Square to Square' },
+    { id: 'Square-Circle', name: 'Square to Circle' }
   ];
 
-  // Calculate results based on inputs
-  const calculateResults = () => {
-    // Get base data for selected shape
-    const baseData = sdShapesBaseData[selectedShape];
-    
-    // Interpolate data based on angle and velocity
-    const interpolatedData = interpolateData(baseData, angle, velocity);
-    
-    // Format results for display
-    const pressureDrop = Math.abs(interpolatedData["Pressure Loss"]).toFixed(2);
-    const totalPressureRecovery = (interpolatedData["Outlet Total Pressure"] / 101325).toFixed(4);
-    const distortionCoefficient = (
-      (Math.max(...baseData.performance["Outlet Velocity"]) - interpolatedData["Outlet Velocity"]) / 
-      Math.max(...baseData.performance["Outlet Velocity"]) * 0.8
-    ).toFixed(4);
-    const flowUniformity = (
-      (1 - interpolatedData["Velocity Loss"] / 100) * 100
-    ).toFixed(2) + '%';
-    
-    // Prepare S-duct shape data for performance analysis
-    const updatedSDuctShapes = Object.keys(sdShapesBaseData).map(key => {
-      const data = sdShapesBaseData[key];
-      // Include the interpolated performance metrics for the current angle and velocity
-      return {
-        type: data.type,
-        performance: {
-          description: [
-            data.description
-          ]
-        },
-        // Add the numerical interpolated values
-        interpolatedMetrics: key === selectedShape ? interpolatedData : null
-      };
-    });
-    
-    setInterpolatedSDuctData(updatedSDuctShapes);
-    
-    return {
-      pressureDrop,
-      totalPressureRecovery,
-      distortionCoefficient,
-      flowUniformity,
-      rawData: interpolatedData
+  // Function to POST data to the Flask backend for prediction
+  const handleCalculate = async () => {
+    const machNumber = velocity / 343;
+    const payload = {
+      "Mach Number": machNumber,
+      "Angle": angle,
+      "Inlet Velocity (m/s)": velocity,
+      "Inlet Pressure (Pa)": 1e5,
+      "Geometry": selectedShape
     };
-  };
 
-  // Effect to simulate calculation
-  useEffect(() => {
-    if (isCalculating) {
-      const timer = setTimeout(() => {
-        const calculatedResults = calculateResults();
-        setResults(calculatedResults);
-        setIsCalculating(false);
-        setShowResults(true);
-      }, 1500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [isCalculating, angle, velocity, selectedShape]);
-
-  const handleCalculate = () => {
     setIsCalculating(true);
     setResults(null);
     setShowPerformanceAnalysis(false);
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/predict', payload);
+      setResults(response.data);
+      setShowResults(true);
+    } catch (error) {
+      console.error("Error fetching prediction:", error);
+      alert("Prediction failed. Check the console for details.");
+    } finally {
+      setIsCalculating(false);
+    }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <div className="container mx-auto py-8">
+    <div className="flex flex-col min-h-screen bg-gray-50" id="ai-model">
+      {/* Added padding-top to create space for the fixed navbar */}
+      <div className="container mx-auto py-8 pt-24">
         <header className="mb-8 text-center relative">
           <div className="absolute top-0 left-0">
             <button
@@ -310,7 +226,6 @@ function AIModel({ onBack }) {
               ← Back
             </button>
           </div>
-          
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
             S-Duct AI Model Simulator
           </h1>
@@ -320,10 +235,9 @@ function AIModel({ onBack }) {
         </header>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Input Parameters Section */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-bold mb-4 text-gray-800">Input Parameters</h2>
-            
-            {/* Angle input */}
             <CustomNumberInput
               label="Bend Angle"
               min={0}
@@ -333,7 +247,6 @@ function AIModel({ onBack }) {
               onChange={setAngle}
               unit="degrees"
             />
-            
             <CustomRangeInput
               label="Bend Angle"
               min={0}
@@ -343,8 +256,6 @@ function AIModel({ onBack }) {
               onChange={setAngle}
               unit="degrees"
             />
-            
-            {/* Velocity input */}
             <CustomNumberInput
               label="Inlet Velocity"
               min={68}
@@ -354,7 +265,6 @@ function AIModel({ onBack }) {
               onChange={setVelocity}
               unit="m/s"
             />
-            
             <CustomRangeInput
               label="Inlet Velocity"
               min={68}
@@ -364,14 +274,11 @@ function AIModel({ onBack }) {
               onChange={setVelocity}
               unit="m/s"
             />
-            
-            {/* Shape selector */}
             <ShapeSelector
               shapes={shapes}
               selectedShape={selectedShape}
               onSelect={setSelectedShape}
             />
-            
             <button
               onClick={handleCalculate}
               disabled={isCalculating}
@@ -383,9 +290,9 @@ function AIModel({ onBack }) {
             </button>
           </div>
           
+          {/* Predicted Results Section */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-bold mb-4 text-gray-800">Predicted Results</h2>
-            
             {isCalculating ? (
               <div className="flex flex-col items-center justify-center h-64">
                 <motion.div
@@ -395,7 +302,7 @@ function AIModel({ onBack }) {
                 />
                 <p className="mt-4 text-gray-700">Processing with AI model...</p>
               </div>
-            ) : showResults ? (
+            ) : showResults && results ? (
               <AnimatePresence>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -405,46 +312,28 @@ function AIModel({ onBack }) {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-500">Pressure Drop</h3>
-                      <p className="text-2xl font-bold text-gray-800">{results.pressureDrop} Pa</p>
+                      <h3 className="text-sm font-medium text-gray-500">Outlet Velocity (m/s)</h3>
+                      <p className="text-2xl font-bold text-gray-800">
+                        {results["Outlet Velocity (m/s)"].toFixed(2)}
+                      </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-500">Total Pressure Recovery</h3>
-                      <p className="text-2xl font-bold text-gray-800">{results.totalPressureRecovery}</p>
+                      <h3 className="text-sm font-medium text-gray-500">Outlet Pressure (Pa)</h3>
+                      <p className="text-2xl font-bold text-gray-800">
+                        {results["Outlet Pressure (Pa)"].toFixed(2)}
+                      </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-500">Distortion Coefficient</h3>
-                      <p className="text-2xl font-bold text-gray-800">{results.distortionCoefficient}</p>
+                      <h3 className="text-sm font-medium text-gray-500">Velocity Loss (%)</h3>
+                      <p className="text-2xl font-bold text-gray-800">
+                        {results["Velocity Loss (%)"].toFixed(2)}
+                      </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-gray-500">Flow Uniformity</h3>
-                      <p className="text-2xl font-bold text-gray-800">{results.flowUniformity}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6">
-                    <h3 className="text-lg font-medium mb-2">Detailed Metrics</h3>
-                    <div className="bg-gray-50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {results.rawData && Object.entries(results.rawData).map(([key, value]) => (
-                        <div key={key} className="flex justify-between items-center">
-                          <span className="text-gray-700">{key}:</span>
-                          <span className="font-medium">
-                            {typeof value === 'number' 
-                              ? key.includes('Pressure') 
-                                ? value.toFixed(0) + ' Pa' 
-                                : value.toFixed(2) + (key.includes('Velocity') ? ' m/s' : '')
-                              : value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-6 flex justify-center">
-                      <button 
-                        onClick={() => setShowPerformanceAnalysis(!showPerformanceAnalysis)}
-                        className="px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-                      >
-                        {showPerformanceAnalysis ? 'Hide Detailed Performance Analysis' : 'Show Detailed Performance Analysis'}
-                      </button>
+                      <h3 className="text-sm font-medium text-gray-500">Pressure Loss (%)</h3>
+                      <p className="text-2xl font-bold text-gray-800">
+                        {results["Pressure Loss (%)"].toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -454,27 +343,16 @@ function AIModel({ onBack }) {
                 <p>Enter parameters and click Calculate to see results</p>
               </div>
             )}
+            
+            {/* Updated Metrics Display */}
+            <ModelMetricsDisplay />
           </div>
         </div>
         
-        {/* Performance Analysis Section */}
-        {showPerformanceAnalysis && showResults && interpolatedSDuctData && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="mt-8"
-          >
-            <div className="bg-white p-6 rounded-lg shadow">
-              <PerformanceAnalysis 
-                angle={angle} 
-                s_duct_shapes={interpolatedSDuctData}
-                selectedShape={selectedShape}
-                interpolatedData={results.rawData}
-              />
-            </div>
-          </motion.div>
+        {showResults && results && (
+          <div className="mt-8">
+            <PerformanceAnalysis results={results} angle={angle} velocity={velocity} shape={selectedShape} />
+          </div>
         )}
       </div>
     </div>
