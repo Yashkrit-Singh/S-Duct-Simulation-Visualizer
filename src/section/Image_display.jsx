@@ -122,7 +122,7 @@ const ImageDisplay = ({ angle, data }) => {
               animate={{ opacity: hoverIndex === index ? 0.9 : 0.3 }}
             />
             <motion.div 
-              className="absolute bottom-0 left-0 right-0 p-6 text-white"
+              className="absolute bottom-0 left-0 right-0 p-6 text-black"
               initial={{ y: 10, opacity: 0.7 }}
               animate={{ 
                 y: hoverIndex === index ? 0 : 10,

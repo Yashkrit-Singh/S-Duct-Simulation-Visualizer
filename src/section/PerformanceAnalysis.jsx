@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
 import { Printer } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-  
+
 const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   const [activeMetric, setActiveMetric] = useState('Outlet Velocity');
   const [showDescription, setShowDescription] = useState(false);
@@ -15,45 +15,67 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   
   // Find the closest angle index
   const getClosestAngleIndex = (targetAngle) => {
-    return bendAngles.reduce((prev, curr, idx) => 
-      Math.abs(curr - targetAngle) < Math.abs(bendAngles[prev] - targetAngle) ? idx : prev, 0);
+    return bendAngles.reduce(
+      (prev, curr, idx) =>
+        Math.abs(curr - targetAngle) < Math.abs(bendAngles[prev] - targetAngle) ? idx : prev,
+      0
+    );
   };
   
   const angleIndex = getClosestAngleIndex(angle);
   
-  // Performance data for all duct types
+  // Define colors for each duct type
+  const colors = {
+    "Circle-Circle": "#8884d8",
+    "Square-Square": "#82ca9d",
+    "Square-Circle": "#ffc658",
+    "Circle-Square": "#ff7300"
+  };
+  
+  // Performance data with pressure values for "Outlet Total Pressure" converted to kPa
+  // and "Pressure Loss" values kept as percentages.
   const performanceData = {
     "Circle-Circle": {
       "Outlet Velocity": [125.9, 117.1, 106.8, 98.4, 89.7, 81.8, 75.3],
-      "Outlet Total Pressure": [106000, 89000, 77000, 70000, 55000, 44500, 38500],
+      "Outlet Total Pressure": [106000, 89000, 77000, 70000, 55000, 44500, 38500].map(val => val / 1000),
       "Velocity Loss": [38.82, 45.12, 52.10, 58.22, 64.30, 70.25, 75.10],
       "Pressure Loss": [-6.00, 11.00, 23.00, 30.00, 45.00, 55.50, 61.50],
       "Centerline Velocity": [201.68, 188.49, 175.29, 162.09, 148.89, 135.70, 122.50],
     },
     "Square-Square": {
       "Outlet Velocity": [119.80, 110.60, 101.50, 94.70, 86.40, 79.50, 72.90],
-        "Outlet Total Pressure": [109500, 95000, 81500, 73500, 58000, 47000, 40500],
-        "Velocity Loss": [41.79, 49.08, 55.40, 61.50, 67.70, 73.15, 78.90],
-        "Pressure Loss": [-9.5, 5.00, 18.50, 26.50, 42.00, 53.00, 59.50],
+      "Outlet Total Pressure": [109500, 95000, 81500, 73500, 58000, 47000, 40500].map(val => val / 1000),
+      "Velocity Loss": [41.79, 49.08, 55.40, 61.50, 67.70, 73.15, 78.90],
+      "Pressure Loss": [-9.50, 5.00, 18.50, 26.50, 42.00, 53.00, 59.50],
       "Centerline Velocity": [201.68, 185.88, 170.06, 154.25, 138.44, 122.63, 106.82],
     },
     "Square-Circle": {
       "Outlet Velocity": [121.90, 112.80, 103.20, 96.10, 87.40, 79.80, 73.20],
-        "Outlet Total Pressure": [103000, 87500, 74000, 67000, 52000, 40500, 34000],
-        "Velocity Loss": [40.76, 48.50, 55.90, 62.15, 68.90, 74.80, 80.40],
-        "Pressure Loss": [-3.00, 12.50, 26.00, 33.00, 48.00, 59.50, 66.00],
+      "Outlet Total Pressure": [103000, 87500, 74000, 67000, 52000, 40500, 34000].map(val => val / 1000),
+      "Velocity Loss": [40.76, 48.50, 55.90, 62.15, 68.90, 74.80, 80.40],
+      "Pressure Loss": [-3.00, 12.50, 26.00, 33.00, 48.00, 59.50, 66.00],
       "Centerline Velocity": [201.68, 189.80, 177.90, 166.01, 154.12, 142.23, 130.34],
     },
     "Circle-Square": {
       "Outlet Velocity": [113.31, 103.50, 94.50, 88.20, 79.20, 71.10, 64.80],
-      "Outlet Total Pressure": [111340, 98000, 87010, 79100, 62150, 50285, 43505],
+      "Outlet Total Pressure": [111340, 98000, 87010, 79100, 62150, 50285, 43505].map(val => val / 1000),
       "Velocity Loss": [44.94, 52.00, 58.80, 65.10, 71.70, 77.80, 83.40],
       "Pressure Loss": [-11.34, 2.00, 12.99, 20.90, 37.85, 49.71, 56.49],
       "Centerline Velocity": [201.68, 194.04, 186.24, 178.35, 170.61, 163.46, 155.82],
     }
   };
   
-  // Available metrics
+  // Define units for each metric  
+  // "Outlet Total Pressure" uses kPa and "Pressure Loss" now uses "%" as these are percentages.
+  const metricUnits = {
+    "Outlet Velocity": "m/s",
+    "Outlet Total Pressure": "kPa",
+    "Centerline Velocity": "m/s",
+    "Velocity Loss": "%",
+    "Pressure Loss": "%"
+  };
+  
+  // Available metrics to select from
   const metrics = [
     "Outlet Velocity", 
     "Outlet Total Pressure", 
@@ -62,7 +84,7 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
     "Pressure Loss"
   ];
   
-  // Map from component naming to JSON data structure naming
+  // Mapping between display name and JSON data structure naming
   const ductTypeMapping = {
     "Circle-Circle": "circle_inlet_to_circle_outlet",
     "Square-Square": "square_inlet_to_square_outlet",
@@ -70,16 +92,14 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
     "Circle-Square": "circle_inlet_to_square_outlet"
   };
   
-  // Get descriptions from JSON data
+  // Get descriptions from JSON data (if provided)
   const getDescriptions = () => {
     const descriptions = {};
-    
     if (!s_duct_shapes) return descriptions;
     
     Object.keys(ductTypeMapping).forEach(ductType => {
       const jsonDuctType = ductTypeMapping[ductType];
       const ductData = s_duct_shapes.find(shape => shape.type === jsonDuctType);
-      
       if (ductData && ductData.performance && ductData.performance.description) {
         descriptions[ductType] = ductData.performance.description[angleIndex] || {};
       } else {
@@ -92,57 +112,42 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   
   const descriptions = getDescriptions();
   
-  // Prepare data for trend chart (showing how metrics change across all angles)
+  // Prepare data for a trend chart across all angles
   const prepareTrendData = (metric) => {
     return bendAngles.map((bendAngle, idx) => {
-      const dataPoint = {
-        angle: bendAngle
-      };
-      
+      const dataPoint = { angle: bendAngle };
       Object.keys(performanceData).forEach(ductType => {
         dataPoint[ductType] = performanceData[ductType][metric][idx];
       });
-      
       return dataPoint;
     });
   };
   
-  // Prepare data for comparison chart (comparing all duct types at the selected angle)
+  // Prepare data for a comparison chart at the selected angle
   const prepareComparisonData = () => {
     return metrics.map(metric => {
-      const dataPoint = {
-        metric: metric
-      };
-      
+      const dataPoint = { metric };
       Object.keys(performanceData).forEach(ductType => {
         dataPoint[ductType] = performanceData[ductType][metric][angleIndex];
       });
-      
       return dataPoint;
     });
   };
   
-  // Prepare data for the single metric bar chart (all duct types at current angle)
+  // Prepare data for a single metric bar chart at the current angle
   const prepareBarChartData = (metric) => {
     return Object.keys(performanceData).map(ductType => ({
       name: ductType,
-      value: performanceData[ductType][metric][angleIndex]
+      value: performanceData[ductType][metric][angleIndex],
+      ductType: ductType
     }));
-  };
-  
-  // Define colors for each duct type
-  const colors = {
-    "Circle-Circle": "#8884d8",
-    "Square-Square": "#82ca9d",
-    "Square-Circle": "#ffc658",
-    "Circle-Square": "#ff7300"
   };
   
   const trendData = prepareTrendData(activeMetric);
   const comparisonData = prepareComparisonData();
   const barChartData = prepareBarChartData(activeMetric);
   
-  // Custom tooltip format
+  // Custom tooltip for line chart with units
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
@@ -150,7 +155,7 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
           <p className="font-bold">{`Angle: ${label}°`}</p>
           {payload.map((entry, index) => (
             <p key={index} style={{ color: entry.color }}>
-              {`${entry.name}: ${entry.value.toLocaleString()}`}
+              {`${entry.name}: ${entry.value.toLocaleString()} ${metricUnits[activeMetric] || ''}`}
             </p>
           ))}
         </div>
@@ -159,110 +164,92 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
     return null;
   };
   
-  // Toggle description panel
+  // Custom tooltip for bar chart with units
+  const CustomBarTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="bg-white p-4 border border-gray-200 rounded shadow-md">
+          <p className="font-bold">{data.name}</p>
+          <p style={{ color: colors[data.ductType] }}>
+            {`${activeMetric}: ${data.value.toLocaleString()} ${metricUnits[activeMetric] || ''}`}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+  
+  // Toggle the description panel visibility
   const toggleDescription = () => {
     setShowDescription(!showDescription);
   };
 
-  // Function to wait for state updates to complete
+  // Wait for state updates to reflect in the DOM before proceeding
   const waitForStateUpdate = () => {
     return new Promise(resolve => {
-      // Use requestAnimationFrame to ensure the component has rendered
       requestAnimationFrame(() => {
-        // Then use setTimeout to give React a chance to complete the rendering
-        setTimeout(resolve, 300); // Increased from 100ms to 300ms for more reliable rendering
+        setTimeout(resolve, 300);
       });
     });
   };
 
-  // Function to capture component as image
+  // Capture component as an image using html2canvas
   const captureComponentAsImage = async (element) => {
     if (!element) return null;
-    
     const canvas = await html2canvas(element, {
-      scale: 2, // Higher scale for better quality
+      scale: 2,
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff'
     });
-    
     return canvas.toDataURL('image/png');
   };
 
-  // Function to add a title page with table of contents
+  // Add a title page and table of contents to the PDF report
   const addTitlePage = (pdf) => {
-    // Set font styles
     pdf.setFont('helvetica', 'bold');
     pdf.setFontSize(24);
-    
-    // Get page dimensions
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    
-    // Add title
     pdf.text('S-Duct Performance Analysis Report', pageWidth / 2, 40, { align: 'center' });
-    
-    // Add angle information
     pdf.setFontSize(18);
     pdf.text(`Bend Angle: ${bendAngles[angleIndex]}°`, pageWidth / 2, 60, { align: 'center' });
-    
-    // Add generation date
     const today = new Date();
-    const formattedDate = today.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
+    const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     pdf.text(`Generated on: ${formattedDate}`, pageWidth / 2, 75, { align: 'center' });
-    
-    // Add table of contents
     pdf.setFontSize(20);
     pdf.text('Table of Contents', pageWidth / 2, 100, { align: 'center' });
-    
-    // Add TOC entries
     pdf.setFont('helvetica', 'normal');
     pdf.setFontSize(14);
     let yPosition = 120;
-    
     metrics.forEach((metric, index) => {
-      pdf.text(`${index + 1}. ${metric}`, pageWidth / 2, yPosition, { align: 'center' });
+      pdf.text(`${index + 1}. ${metric} (${metricUnits[metric]})`, pageWidth / 2, yPosition, { align: 'center' });
       yPosition += 10;
     });
-    
-    // Optional: Add a decorative line
     pdf.setDrawColor(100, 100, 100);
     pdf.setLineWidth(0.5);
     pdf.line(40, pageHeight - 40, pageWidth - 40, pageHeight - 40);
-    
-    // Add footer text
     pdf.setFontSize(10);
     pdf.setTextColor(100, 100, 100);
     pdf.text('S-Duct Analyzer - Comprehensive Performance Report', pageWidth / 2, pageHeight - 30, { align: 'center' });
   };
 
-  // PDF Download functionality - Enhanced to generate all metrics
+  // Handle PDF download with full report generation
   const handleDownloadPDF = async () => {
     if (!contentRef.current) return;
-    
     setIsDownloading(true);
-    
     try {
-      // Store current state
       const wasDescriptionVisible = showDescription;
       const previousMetric = activeMetric;
-      
-      // Force description panel to be visible
       setShowDescription(true);
       await waitForStateUpdate();
-      
-      // Create PDF document
       const pdf = new jsPDF({
         orientation: 'landscape',
         unit: 'mm',
         format: 'a4'
       });
       
-      // Add metadata
       pdf.setProperties({
         title: `S-Duct Performance Analysis at ${bendAngles[angleIndex]}°`,
         subject: 'S-Duct Performance Analysis',
@@ -270,42 +257,27 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
         keywords: 'CFD, S-Duct, Performance Analysis'
       });
       
-      // Add title page
       addTitlePage(pdf);
       
-      // Generate pages for each metric sequentially
       for (let i = 0; i < metrics.length; i++) {
         const metric = metrics[i];
-        
-        // Update active metric and wait for render
         setActiveMetric(metric);
         await waitForStateUpdate();
-        
-        // Capture the content
         const imgData = await captureComponentAsImage(contentRef.current);
         if (!imgData) continue;
-        
-        // Add new page and image
         pdf.addPage();
-        
-        // Calculate positioning to maintain aspect ratio
         const imgProps = pdf.getImageProperties(imgData);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        
-        // Add title to the page
         pdf.setFont('helvetica', 'bold');
         pdf.setFontSize(12);
         pdf.setTextColor(0, 0, 0);
-        pdf.text(`${i + 1}. ${metric}`, 10, 10);
+        pdf.text(`${i + 1}. ${metric} (${metricUnits[metric]})`, 10, 10);
       }
       
-      // Save PDF
       pdf.save(`s-duct-analysis-${bendAngles[angleIndex]}deg-all-metrics.pdf`);
       
-      // Restore previous states
       setActiveMetric(previousMetric);
       setShowDescription(wasDescriptionVisible);
       await waitForStateUpdate();
@@ -357,7 +329,7 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                     : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                   onClick={() => setActiveMetric(metric)}
                 >
-                  {metric}
+                  {metric} ({metricUnits[metric]})
                 </button>
               ))}
             </div>
@@ -365,18 +337,18 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
           
           {/* Current angle data visualization */}
           <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">{activeMetric} at {bendAngles[angleIndex]}° Bend</h3>
+            <h3 className="text-xl font-semibold mb-4">{activeMetric} ({metricUnits[activeMetric]}) at {bendAngles[angleIndex]}° Bend</h3>
             <div className="bg-gray-50 p-4 rounded-lg">
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={barChartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
+                  <YAxis label={{ value: metricUnits[activeMetric], angle: -90, position: 'insideLeft' }} />
+                  <Tooltip content={<CustomBarTooltip />} />
                   <Legend />
-                  <Bar dataKey="value" fill="#8884d8">
+                  <Bar dataKey="value">
                     {barChartData.map((entry, index) => (
-                      <Bar key={index} dataKey="value" fill={Object.values(colors)[index]} />
+                      <Cell key={`cell-${index}`} fill={colors[entry.ductType]} />
                     ))}
                   </Bar>
                 </BarChart>
@@ -384,18 +356,18 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
             </div>
           </div>
           
-          {/* Trend across all angles */}
+          {/* Trend chart */}
           <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-4">{activeMetric} Trend Across All Angles</h3>
+            <h3 className="text-xl font-semibold mb-4">{activeMetric} ({metricUnits[activeMetric]}) Trend Across All Angles</h3>
             <div className="bg-gray-50 p-4 rounded-lg">
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={trendData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="angle" label={{ value: 'Bend Angle (degrees)', position: 'insideBottomRight', offset: -5 }} />
-                  <YAxis />
+                  <YAxis label={{ value: metricUnits[activeMetric], angle: -90, position: 'insideLeft' }} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  {Object.keys(performanceData).map((ductType, index) => (
+                  {Object.keys(performanceData).map((ductType) => (
                     <Line 
                       key={ductType}
                       type="monotone" 
@@ -419,17 +391,22 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                   <tr className="bg-gray-100">
                     <th className="py-3 px-4 border-b text-left">Metric</th>
                     {Object.keys(performanceData).map(ductType => (
-                      <th key={ductType} className="py-3 px-4 border-b text-left">{ductType}</th>
+                      <th key={ductType} className="py-3 px-4 border-b text-left">
+                        <div className="flex items-center">
+                          <span className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: colors[ductType] }}></span>
+                          {ductType}
+                        </div>
+                      </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {metrics.map((metric, index) => (
                     <tr key={metric} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                      <td className="py-3 px-4 border-b font-medium">{metric}</td>
+                      <td className="py-3 px-4 border-b font-medium">{metric} ({metricUnits[metric]})</td>
                       {Object.keys(performanceData).map(ductType => (
                         <td key={ductType} className="py-3 px-4 border-b">
-                          {performanceData[ductType][metric][angleIndex].toLocaleString()}
+                          {performanceData[ductType][metric][angleIndex].toLocaleString()} {metricUnits[metric]}
                         </td>
                       ))}
                     </tr>
@@ -444,14 +421,12 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
         {showDescription && (
           <div className="w-1/3 bg-white rounded-lg shadow-lg p-6 my-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Metric Description</h2>
-            
             <div className="border-b pb-4 mb-4">
-              <h3 className="text-xl font-semibold mb-2">{activeMetric}</h3>
+              <h3 className="text-xl font-semibold mb-2">{activeMetric} ({metricUnits[activeMetric]})</h3>
               <p className="text-gray-600 mb-4">
                 Selected angle: {bendAngles[angleIndex]}°
               </p>
             </div>
-            
             {Object.keys(ductTypeMapping).map(ductType => (
               <div key={ductType} className="mb-6">
                 <h4 className="text-lg font-medium mb-2 flex items-center">
@@ -466,20 +441,17 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                   )}
                   <div className="mt-4">
                     <p className="font-medium">Performance Value:</p>
-                    <p className="text-lg font-bold text-blue-600">
-                      {performanceData[ductType][activeMetric][angleIndex].toLocaleString()}
+                    <p className="text-lg font-bold" style={{ color: colors[ductType] }}>
+                      {performanceData[ductType][activeMetric][angleIndex].toLocaleString()} {metricUnits[activeMetric]}
                     </p>
                   </div>
                 </div>
               </div>
             ))}
-            
             <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
               <h4 className="text-md font-medium mb-2">Note</h4>
               <p className="text-sm text-gray-600">
-                The descriptions above provide detailed information about how each duct type performs 
-                at the selected metric and angle. Select different metrics using the buttons on the left panel 
-                to see corresponding descriptions.
+                The descriptions above provide detailed information about how each duct type performs at the selected metric and angle. Select different metrics using the buttons on the left panel to see corresponding descriptions.
               </p>
             </div>
           </div>
