@@ -4,3 +4,23 @@ body {
   font-weight: 400; /* Adjust as needed */
   font-style: normal;
 }
+
+/* Add this to your App.css file */
+
+/* Add this to your App.css file */
+
+/* Hide scrollbar for navigation bar */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Additional padding for smooth scrolling with fixed navbar */
+html {
+  scroll-padding-top: 70px; /* Adjust based on your navbar height */
+  scroll-behavior: smooth;
+}
