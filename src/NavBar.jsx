@@ -11,7 +11,7 @@ const NavBar = ({ showAbout, setShowAbout, setShowAIModel }) => {
     { id: 'about', label: 'About', action: () => setShowAbout(true) },
     { id: 'simulation', label: 'Simulation' },
     { id: 'results', label: 'Results' },
-    { id: 'challenges', label: 'Challenges' },
+    // { id: 'challenges', label: 'Challenges' },
     { id: 'ai-model', label: 'AI Model', action: () => setShowAIModel(true) }
   ];
 

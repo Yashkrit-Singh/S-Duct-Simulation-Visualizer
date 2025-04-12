@@ -509,11 +509,11 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                   {duct.key}
                 </h4>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  {descriptions[duct.key] && descriptions[duct.key][activeMetric] ? (
+                  {/* {descriptions[duct.key] && descriptions[duct.key][activeMetric] ? (
                     <p>{descriptions[duct.key][activeMetric]}</p>
                   ) : (
                     <p className="text-gray-500 italic">Description not available for this configuration</p>
-                  )}
+                  )} */}
                   <div className="mt-4">
                     <p className="font-medium">Performance Value:</p>
                     <p className="text-lg font-bold" style={{ color: duct.color }}>

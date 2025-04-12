@@ -7,6 +7,7 @@ import data from './section/s_duct_shapes.json';
 import { motion, AnimatePresence } from 'framer-motion';
 import AIModel from './AIModel';
 import NavBar from './NavBar'; // Import the NavBar component
+import ContributorsFooter from './Footer';
 
 function App() {
   const [angle, setAngle] = useState(0);
@@ -237,8 +238,11 @@ function App() {
               </div>
             </motion.div>
           </AnimatePresence>
+          
         </div>
+      
       )}
+        <ContributorsFooter/>
     </div>
   );
 }
