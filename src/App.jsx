@@ -34,11 +34,11 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Include the NavBar component and pass the state setters */}
-      <NavBar 
+      {!showAIModel && <NavBar 
         showAbout={showAbout} 
         setShowAbout={setShowAbout} 
         setShowAIModel={setShowAIModel} 
-      />
+      />}
       <div className='py-3'></div>
       {showAIModel ? (
         <div id="ai-model">

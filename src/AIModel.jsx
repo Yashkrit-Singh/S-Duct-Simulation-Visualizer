@@ -216,7 +216,7 @@ function AIModel({ onBack }) {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50" id="ai-model">
       {/* Added padding-top to create space for the fixed navbar */}
-      <div className="container mx-auto py-8 pt-24">
+      <div className="container mx-auto py-8 pt-0">
         <header className="mb-8 text-center relative">
           <div className="absolute top-0 left-0">
             <button

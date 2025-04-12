@@ -24,13 +24,19 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   
   const angleIndex = getClosestAngleIndex(angle);
   
-  // Define colors for each duct type
-  const colors = {
-    "Circle-Circle": "#8884d8",
-    "Square-Square": "#82ca9d",
-    "Square-Circle": "#ffc658",
-    "Circle-Square": "#ff7300"
-  };
+  // Define colors and shapes for each duct type
+  const ductTypes = [
+    { key: "Circle-Circle", color: "#8884d8", shape: "circle" },
+    { key: "Square-Square", color: "#82ca9d", shape: "square" },
+    { key: "Square-Circle", color: "#ffc658", shape: "diamond" },
+    { key: "Circle-Square", color: "#ff7300", shape: "triangle" }
+  ];
+  
+  // Create colors object for backward compatibility
+  const colors = ductTypes.reduce((acc, duct) => {
+    acc[duct.key] = duct.color;
+    return acc;
+  }, {});
   
   // Performance data with pressure values for "Outlet Total Pressure" converted to kPa
   // and "Pressure Loss" values kept as percentages.
@@ -66,7 +72,6 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   };
   
   // Define units for each metric  
-  // "Outlet Total Pressure" uses kPa and "Pressure Loss" now uses "%" as these are percentages.
   const metricUnits = {
     "Outlet Velocity": "m/s",
     "Outlet Total Pressure": "kPa",
@@ -147,6 +152,50 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
   const comparisonData = prepareComparisonData();
   const barChartData = prepareBarChartData(activeMetric);
   
+  // Function to render custom shape (from first file)
+  const renderCustomShape = (type, cx, cy, size, fill) => {
+    switch(type) {
+      case 'square':
+        const squareSize = size * 1.5;
+        return (
+          <rect
+            x={cx - squareSize/2}
+            y={cy - squareSize/2}
+            width={squareSize}
+            height={squareSize}
+            fill={fill}
+          />
+        );
+      case 'diamond':
+        return (
+          <polygon
+            points={`${cx},${cy-size} ${cx+size},${cy} ${cx},${cy+size} ${cx-size},${cy}`}
+            fill={fill}
+          />
+        );
+      case 'triangle':
+        return (
+          <polygon
+            points={`${cx},${cy-size} ${cx+size},${cy+size} ${cx-size},${cy+size}`}
+            fill={fill}
+          />
+        );
+      case 'circle':
+      default:
+        return <circle cx={cx} cy={cy} r={size} fill={fill} />;
+    }
+  };
+  
+  // Custom dot for line charts
+  const CustomDot = (props) => {
+    const { cx, cy, stroke, payload, dataKey } = props;
+    
+    const ductType = ductTypes.find(d => d.key === dataKey);
+    if (!ductType) return null;
+    
+    return renderCustomShape(ductType.shape, cx, cy, 5, ductType.color);
+  };
+  
   // Custom tooltip for line chart with units
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -178,6 +227,22 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
       );
     }
     return null;
+  };
+  
+  // Custom legend
+  const CustomLegend = () => {
+    return (
+      <div className="flex justify-center items-center mt-4 space-x-8">
+        {ductTypes.map((duct, index) => (
+          <div key={index} className="flex items-center">
+            <svg width="20" height="20" className="mr-2">
+              {renderCustomShape(duct.shape, 10, 10, 6, duct.color)}
+            </svg>
+            <span>{duct.key}</span>
+          </div>
+        ))}
+      </div>
+    );
   };
   
   // Toggle the description panel visibility
@@ -356,29 +421,35 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
             </div>
           </div>
           
-          {/* Trend chart */}
+          {/* Trend chart with custom shapes */}
           <div className="mb-8">
             <h3 className="text-xl font-semibold mb-4">{activeMetric} ({metricUnits[activeMetric]}) Trend Across All Angles</h3>
             <div className="bg-gray-50 p-4 rounded-lg">
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={trendData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="angle" label={{ value: 'Bend Angle (degrees)', position: 'insideBottomRight', offset: -5 }} />
-                  <YAxis label={{ value: metricUnits[activeMetric], angle: -90, position: 'insideLeft' }} />
+                  <XAxis 
+                    dataKey="angle" 
+                    label={{ value: 'Bend Angle (degrees)', position: 'insideBottomRight', offset: -5 }} 
+                  />
+                  <YAxis 
+                    label={{ value: metricUnits[activeMetric], angle: -90, position: 'insideLeft' }} 
+                  />
                   <Tooltip content={<CustomTooltip />} />
-                  <Legend />
-                  {Object.keys(performanceData).map((ductType) => (
+                  {ductTypes.map((duct) => (
                     <Line 
-                      key={ductType}
+                      key={duct.key}
                       type="monotone" 
-                      dataKey={ductType} 
-                      stroke={colors[ductType]} 
+                      dataKey={duct.key} 
+                      stroke={duct.color} 
                       activeDot={{ r: 8 }} 
                       strokeWidth={2}
+                      dot={<CustomDot />}
                     />
                   ))}
                 </LineChart>
               </ResponsiveContainer>
+              <CustomLegend />
             </div>
           </div>
           
@@ -390,11 +461,13 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                 <thead>
                   <tr className="bg-gray-100">
                     <th className="py-3 px-4 border-b text-left">Metric</th>
-                    {Object.keys(performanceData).map(ductType => (
-                      <th key={ductType} className="py-3 px-4 border-b text-left">
+                    {ductTypes.map(duct => (
+                      <th key={duct.key} className="py-3 px-4 border-b text-left">
                         <div className="flex items-center">
-                          <span className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: colors[ductType] }}></span>
-                          {ductType}
+                          <svg width="14" height="14" className="mr-2">
+                            {renderCustomShape(duct.shape, 7, 7, 5, duct.color)}
+                          </svg>
+                          {duct.key}
                         </div>
                       </th>
                     ))}
@@ -404,9 +477,9 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                   {metrics.map((metric, index) => (
                     <tr key={metric} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                       <td className="py-3 px-4 border-b font-medium">{metric} ({metricUnits[metric]})</td>
-                      {Object.keys(performanceData).map(ductType => (
-                        <td key={ductType} className="py-3 px-4 border-b">
-                          {performanceData[ductType][metric][angleIndex].toLocaleString()} {metricUnits[metric]}
+                      {ductTypes.map(duct => (
+                        <td key={duct.key} className="py-3 px-4 border-b">
+                          {performanceData[duct.key][metric][angleIndex].toLocaleString()} {metricUnits[metric]}
                         </td>
                       ))}
                     </tr>
@@ -427,22 +500,24 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
                 Selected angle: {bendAngles[angleIndex]}°
               </p>
             </div>
-            {Object.keys(ductTypeMapping).map(ductType => (
-              <div key={ductType} className="mb-6">
+            {ductTypes.map(duct => (
+              <div key={duct.key} className="mb-6">
                 <h4 className="text-lg font-medium mb-2 flex items-center">
-                  <span className="w-4 h-4 rounded-full mr-2" style={{ backgroundColor: colors[ductType] }}></span>
-                  {ductType}
+                  <svg width="16" height="16" className="mr-2">
+                    {renderCustomShape(duct.shape, 8, 8, 6, duct.color)}
+                  </svg>
+                  {duct.key}
                 </h4>
                 <div className="bg-gray-50 p-4 rounded-lg">
-                  {descriptions[ductType] && descriptions[ductType][activeMetric] ? (
-                    <p>{descriptions[ductType][activeMetric]}</p>
+                  {descriptions[duct.key] && descriptions[duct.key][activeMetric] ? (
+                    <p>{descriptions[duct.key][activeMetric]}</p>
                   ) : (
                     <p className="text-gray-500 italic">Description not available for this configuration</p>
                   )}
                   <div className="mt-4">
                     <p className="font-medium">Performance Value:</p>
-                    <p className="text-lg font-bold" style={{ color: colors[ductType] }}>
-                      {performanceData[ductType][activeMetric][angleIndex].toLocaleString()} {metricUnits[activeMetric]}
+                    <p className="text-lg font-bold" style={{ color: duct.color }}>
+                      {performanceData[duct.key][activeMetric][angleIndex].toLocaleString()} {metricUnits[activeMetric]}
                     </p>
                   </div>
                 </div>
