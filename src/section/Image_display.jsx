@@ -11,8 +11,17 @@ const ImageDisplay = ({ angle, data }) => {
   // Color map labels for each contour type
   const colorMapLabels = {
     contour1_values: "Velocity (m/s)",
-    contour2_values: "Pressure (kPa)",
+    contour2_values: "Pressure (Pa)",
     contour3_values: "Wall Y Plus"
+  };
+
+  // Add a mapping for units for each performance metric
+  const performanceUnits = {
+    'Outlet Velocity': 'm/s',
+    'Outlet Total Pressure': 'Pa',
+    'Centerline Velocity': 'm/s',
+    'Velocity Loss': '%',
+    'Pressure Loss': '%'
   };
 
   // Filter items that match the current angle
@@ -84,81 +93,81 @@ const ImageDisplay = ({ angle, data }) => {
       <h2 className="text-3xl font-bold text-center mb-8">S-Duct Shapes at {angle}° Bend Angle</h2>
       
       {/* Grid Layout */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-  {filteredItems.map((item, index) => {
-    const angleIndex = item.bend_angles.indexOf(angle);
-    const hasImage = item.performance?.images?.[angleIndex];
-    
-    return (
-      <motion.div 
-        key={index} 
-        className="relative overflow-hidden rounded-xl cursor-pointer"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.1 }}
-        whileHover={{ 
-          scale: 1.03, 
-          boxShadow: "0 20px 40px rgba(0,0,0,0.4)" 
-        }}
-        onClick={() => setSelectedItem(JSON.parse(JSON.stringify({ ...item, angleIndex })))}
-        onMouseEnter={() => setHoverIndex(index)}
-        onMouseLeave={() => setHoverIndex(null)}
-      >
-        {hasImage && (
-          <div className="relative aspect-square">
-            <motion.img 
-              src={item.performance.images[angleIndex]} 
-              alt={item.type} 
-              className="w-full h-full object-contain" // Changed from object-cover to object-contain
-              animate={{ 
-                scale: hoverIndex === index ? 1.05 : 1, // Reduced the scale effect
-                filter: hoverIndex === index ? "brightness(0.7)" : "brightness(1)"
-              }}
-              transition={{ duration: 0.3 }}
-            />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+        {filteredItems.map((item, index) => {
+          const angleIndex = item.bend_angles.indexOf(angle);
+          const hasImage = item.performance?.images?.[angleIndex];
+          
+          return (
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
-              initial={{ opacity: 0.3 }}
-              animate={{ opacity: hoverIndex === index ? 0.9 : 0.3 }}
-            />
-            <motion.div 
-              className="absolute bottom-0 left-0 right-0 p-6 text-black"
-              initial={{ y: 10, opacity: 0.7 }}
-              animate={{ 
-                y: hoverIndex === index ? 0 : 10,
-                opacity: hoverIndex === index ? 1 : 0.7 
+              key={index} 
+              className="relative overflow-hidden rounded-xl cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ 
+                scale: 1.03, 
+                boxShadow: "0 20px 40px rgba(0,0,0,0.4)" 
               }}
+              onClick={() => setSelectedItem(JSON.parse(JSON.stringify({ ...item, angleIndex })))}
+              onMouseEnter={() => setHoverIndex(index)}
+              onMouseLeave={() => setHoverIndex(null)}
             >
-              <h3 className="text-2xl font-bold mb-2 capitalize">
-                {item.type.replace(/_/g, ' ')}
-              </h3>
-              {hoverIndex === index && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <p className="text-sm mb-3 opacity-80">
-                    {item.performance?.['Velocity Loss']?.[angleIndex] && 
-                      `Velocity Loss: ${item.performance['Velocity Loss'][angleIndex]}`
-                    }
-                  </p>
-                  <motion.button 
-                    className="px-4 py-2 bg-white text-black rounded-full text-sm font-semibold"
-                    whileHover={{ scale: 1.05, backgroundColor: "#f0f0f0" }}
-                    whileTap={{ scale: 0.95 }}
+              {hasImage && (
+                <div className="relative aspect-square">
+                  <motion.img 
+                    src={item.performance.images[angleIndex]} 
+                    alt={item.type} 
+                    className="w-full h-full object-contain"
+                    animate={{ 
+                      scale: hoverIndex === index ? 1.05 : 1,
+                      filter: hoverIndex === index ? "brightness(0.7)" : "brightness(1)"
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: hoverIndex === index ? 0.9 : 0.3 }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 p-6 text-black"
+                    initial={{ y: 10, opacity: 0.7 }}
+                    animate={{ 
+                      y: hoverIndex === index ? 0 : 10,
+                      opacity: hoverIndex === index ? 1 : 0.7 
+                    }}
                   >
-                    View Details
-                  </motion.button>
-                </motion.div>
+                    <h3 className="text-2xl font-bold mb-2 capitalize">
+                      {item.type.replace(/_/g, ' ')}
+                    </h3>
+                    {hoverIndex === index && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        <p className="text-sm mb-3 opacity-80">
+                          {item.performance?.['Velocity Loss']?.[angleIndex] && 
+                            `Velocity Loss: ${item.performance['Velocity Loss'][angleIndex]}${performanceUnits['Velocity Loss']}`
+                          }
+                        </p>
+                        <motion.button 
+                          className="px-4 py-2 bg-white text-black rounded-full text-sm font-semibold"
+                          whileHover={{ scale: 1.05, backgroundColor: "#f0f0f0" }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          View Details
+                        </motion.button>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
               )}
             </motion.div>
-          </div>
-        )}
-      </motion.div>
-    );
-  })}
-</div>
+          );
+        })}
+      </div>
 
       {/* No results message */}
       {filteredItems.length === 0 && (
@@ -243,20 +252,24 @@ const ImageDisplay = ({ angle, data }) => {
                     <div className="grid grid-cols-2 gap-4 mt-4">
                       <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Bend Angle</p>
-                        <p className="text-xl font-bold">{selectedItem.bend_angles[selectedItem.angleIndex]}°</p>
+                        <p className="text-xl text-white font-bold">{selectedItem.bend_angles[selectedItem.angleIndex]}°</p>
                       </div>
                       
                       {selectedItem.performance?.['Velocity Loss']?.[selectedItem.angleIndex] && (
                         <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
                           <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Velocity Loss</p>
-                          <p className="text-xl font-bold">{selectedItem.performance['Velocity Loss'][selectedItem.angleIndex]}</p>
+                          <p className="text-xl text-white font-bold">
+                            {selectedItem.performance['Velocity Loss'][selectedItem.angleIndex]}{performanceUnits['Velocity Loss']}
+                          </p>
                         </div>
                       )}
                       
                       {selectedItem.performance?.['Pressure Loss']?.[selectedItem.angleIndex] && (
                         <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl">
                           <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">Pressure Loss</p>
-                          <p className="text-xl font-bold">{selectedItem.performance['Pressure Loss'][selectedItem.angleIndex]}</p>
+                          <p className="text-xl text-white font-bold">
+                            {selectedItem.performance['Pressure Loss'][selectedItem.angleIndex]}{performanceUnits['Pressure Loss']}
+                          </p>
                         </div>
                       )}
                     </div>
@@ -280,9 +293,9 @@ const ImageDisplay = ({ angle, data }) => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
                           >
-                            <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{key}</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{key} ({performanceUnits[key]})</p>
                             <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                              {selectedItem.performance[key][selectedItem.angleIndex]}
+                              {selectedItem.performance[key][selectedItem.angleIndex]} {performanceUnits[key]}
                             </p>
                           </motion.div>
                         )

@@ -1,4 +1,4 @@
-// App.js with updated Navigation Bar
+// App.js with updated Navigation Bar and Reference Dropdown
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ImageDisplay from './section/Image_display';
@@ -14,6 +14,23 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showAIModel, setShowAIModel] = useState(false);
+  const [showReferenceDropdown, setShowReferenceDropdown] = useState(false);
+
+  // References list
+  const references = [
+    { 
+      title: "Research Paper", 
+      url: "https://www.sciencedirect.com/science/article/abs/pii/S1270963816313517" 
+    },
+    { 
+      title: "Wikipedia", 
+      url: "https://en.wikipedia.org/wiki/S-duct" 
+    },
+    { 
+      title: "Internal Flow (YouTube)", 
+      url: "https://youtu.be/MJQVpvWBwXg?si=oycIkb3c4b41rUOZ" 
+    }
+  ];
 
   // Handle angle changes with a transition effect
   useEffect(() => {
@@ -27,10 +44,24 @@ function App() {
     }
   }, [angle, showAIModel]);
 
-  const handleRedirectToWiki = () => {
-    // Redirect to Wikipedia page instead of downloading
-    window.open("https://en.wikipedia.org/wiki/S-duct", "_blank");
+  const handleOpenReference = (url) => {
+    window.open(url, "_blank");
+    setShowReferenceDropdown(false);
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showReferenceDropdown && !event.target.closest('#reference-dropdown-container')) {
+        setShowReferenceDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showReferenceDropdown]);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -48,15 +79,6 @@ function App() {
       ) : (
         <div className="container mx-auto py-8 pt-16"> {/* Added padding-top to account for navbar */}
           <header id="header" className="mb-8 text-center relative">
-            {/* <div className="absolute top-0 right-0">
-              <button
-                onClick={() => setShowAIModel(true)}
-                className="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
-              >
-                AI Model
-              </button>
-            </div> */}
-
             <h1 className="text-3xl font-bold text-gray-800 mb-2">
               S-Duct Simulation Visualizer
             </h1>
@@ -71,12 +93,73 @@ function App() {
               >
                 Problem Statement
               </button>
-              <button
-                onClick={handleRedirectToWiki}
-                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
-              >
-                Reference
-              </button>
+              
+              {/* Reference dropdown button */}
+              
+{/* Reference dropdown button */}
+<div id="reference-dropdown-container" className="relative">
+  <button
+    onClick={() => setShowReferenceDropdown(!showReferenceDropdown)}
+    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors flex items-center"
+  >
+    References
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      className={`h-4 w-4 ml-2 transform transition-transform ${showReferenceDropdown ? 'rotate-180' : ''}`} 
+      fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  
+  {/* Dropdown menu */}
+  <AnimatePresence>
+    {showReferenceDropdown && (
+      <motion.div 
+        className="absolute z-50 mt-2 w-60 bg-white rounded-md shadow-lg py-1 right-0"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.2 }}
+      >
+        {/* Research Paper */}
+        <button
+          onClick={() => handleOpenReference(references[0].url)}
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          {references[0].title}
+        </button>
+        
+        {/* Wikipedia */}
+        <button
+          onClick={() => handleOpenReference(references[1].url)}
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          {references[1].title}
+        </button>
+        
+        {/* YouTube */}
+        <button
+          onClick={() => handleOpenReference(references[2].url)}
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          {references[2].title}
+        </button>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
             </div>
 
             <AnimatePresence>
@@ -240,9 +323,8 @@ function App() {
           </AnimatePresence>
           
         </div>
-      
       )}
-        <ContributorsFooter/>
+      <ContributorsFooter/>
     </div>
   );
 }
