@@ -426,28 +426,40 @@ const PerformanceAnalysis = ({ angle, s_duct_shapes }) => {
             <h3 className="text-xl font-semibold mb-4">{activeMetric} ({metricUnits[activeMetric]}) Trend Across All Angles</h3>
             <div className="bg-gray-50 p-4 rounded-lg">
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={trendData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis 
-                    dataKey="angle" 
-                    label={{ value: 'Bend Angle (degrees)', position: 'insideBottomRight', offset: -5 }} 
-                  />
-                  <YAxis 
-                    label={{ value: metricUnits[activeMetric], angle: -90, position: 'insideLeft' }} 
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  {ductTypes.map((duct) => (
-                    <Line 
-                      key={duct.key}
-                      type="monotone" 
-                      dataKey={duct.key} 
-                      stroke={duct.color} 
-                      activeDot={{ r: 8 }} 
-                      strokeWidth={2}
-                      dot={<CustomDot />}
-                    />
-                  ))}
-                </LineChart>
+             
+<LineChart data={trendData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
+  <CartesianGrid strokeDasharray="3 3" />
+  <XAxis 
+    dataKey="angle" 
+    label={{ 
+      value: 'Bend Angle (degrees)', 
+      position: 'insideBottom', 
+      offset: -20,
+      style: { textAnchor: 'middle' }
+    }} 
+  />
+  <YAxis 
+    label={{ 
+      value: `${activeMetric} (${metricUnits[activeMetric]})`, 
+      angle: -90, 
+      position: 'insideLeft',
+      style: { textAnchor: 'middle' },
+      offset: -10
+    }} 
+  />
+  <Tooltip content={<CustomTooltip />} />
+  {ductTypes.map((duct) => (
+    <Line 
+      key={duct.key}
+      type="monotone" 
+      dataKey={duct.key} 
+      stroke={duct.color} 
+      activeDot={{ r: 8 }} 
+      strokeWidth={2}
+      dot={<CustomDot />}
+    />
+  ))}
+</LineChart>
               </ResponsiveContainer>
               <CustomLegend />
             </div>

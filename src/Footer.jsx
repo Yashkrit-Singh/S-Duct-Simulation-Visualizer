@@ -137,7 +137,7 @@ const ContributorsFooter = () => {
             </ul>
             <div className="pt-4 mt-6 border-t border-blue-700">
               <p className="text-sm text-blue-300">
-                This project is licensed under the MIT License. © {currentYear} Fluid Dynamics Research Team.
+                This project is licensed under the MIT License. © {currentYear}.
               </p>
             </div>
           </div>
