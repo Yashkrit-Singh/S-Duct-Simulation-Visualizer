@@ -86,13 +86,23 @@ We also developed an **interactive web-based platform** for result visualization
 - **Turbulent 3D Flow Simulation** complexities  
 - **High-resolution meshing** for boundary layers  
 - **Data preprocessing** and **encoding** for AI model  
-- **Integration** of simulation data into a live web platform  
+- **Integration** of simulation data into a live web platform
+
+
+## Disclaimer 
+
+The results presented in this project are preliminary and have been validated primarily for circular cross-sections and straight channel configurations with analytical results, as well as for the case provided in Ref[]. These findings should be used for comparative study purposes only and not as definitive data for actual engineering designs.
 
 
 
 ##  Conclusion
 
 By integrating **CFD**, **AI**, and **interactive tools**, this project provides a complete workflow for **fast, accurate**, and **cost-effective** aerodynamic design of **S-ducts**. The hybrid approach bridges **engineering analysis** and **modern software development**.
+
+
+## License
+
+This project is licensed under the MIT License.
 
 
 
